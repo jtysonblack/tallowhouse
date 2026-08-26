@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Not Found" description="Page not found.">
+  <section class="section not-found section-dark">
+    <div class="container not-found-inner">
+      <h1 class="h1">Sold Out.</h1>
+      <p class="body-lg">This page doesn't exist — kind of like our menu after 8PM–SELLOUT.</p>
+      <a href="/" class="btn btn-primary">Back Home</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .not-found { min-height: 70vh; display: flex; align-items: center; }
+  .not-found-inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-4); }
+  .not-found-inner .body-lg { color: var(--cream-300); max-width: 40ch; margin-bottom: var(--space-4); }
+</style>

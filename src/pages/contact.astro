@@ -1,0 +1,288 @@
+---
+import Layout from '../layouts/Layout.astro';
+import site from '../data/site.json';
+import hours from '../data/hours.json';
+---
+
+<Layout
+  title="Contact"
+  description="Join the Tallow House family — now hiring grill cook. Or get in touch: location, hours, and a contact form. No phone, no email listed."
+>
+  <section class="section join-hero section-dark">
+    <div class="container join-hero-grid">
+      <div>
+        <p class="script join-hero-script">Come be part of this.</p>
+        <h1 class="join-headline">Join The Family</h1>
+        <p class="join-subheadline">Now Hiring Grill Cook</p>
+        <ul class="join-reqs">
+          <li>Must be comfortable with high kitchen volume</li>
+          <li>Very competitive pay</li>
+          <li>Full time position</li>
+        </ul>
+      </div>
+      <div class="join-photo-strip">
+        <img src="/images/careers-team-plating.jpg" alt="Team plating burgers behind the counter" loading="lazy" />
+        <img src="/images/careers-grill-action.jpg" alt="Raw smash patties on the flat top with fryer baskets" loading="lazy" />
+        <img src="/images/careers-cook-portrait.jpg" alt="Cook in a Tallow House cap at the flat top grill" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section application-section">
+    <div class="container-narrow">
+      <form
+        name="job-application"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        action="/thank-you"
+        class="app-form"
+      >
+        <input type="hidden" name="form-name" value="job-application" />
+        <p class="hidden-field">
+          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        </p>
+
+        <div class="form-row">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="form-row form-row-split">
+          <div>
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="position">Position Interest</label>
+          <select id="position" name="position" required>
+            <option value="">Select one</option>
+            <option>Grill Cook</option>
+            <option>Front Counter / Team</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="availability">Availability</label>
+          <input type="text" id="availability" name="availability" placeholder="e.g. Evenings, weekends, full-time" required />
+        </div>
+
+        <div class="form-row">
+          <label for="message">Anything else we should know?</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Application</button>
+      </form>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <section class="section contact-grid-section">
+    <div class="container">
+      <h2 class="h2">Contact Us</h2>
+      <p class="body-lg contact-desc">
+        We don't list a phone number or email — send a message here, or find us
+        on Instagram where the real-time updates live.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="info-block">
+            <h3 class="h3">Location</h3>
+            <p>{site.location.line1}<br />{site.location.line2}</p>
+            <a
+              href={`https://maps.google.com/?q=${encodeURIComponent(site.location.mapQuery)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-secondary"
+              style="margin-top: var(--space-4);"
+            >Get Directions →</a>
+          </div>
+
+          <div class="info-block">
+            <h3 class="h3">Hours</h3>
+            <ul class="hours-list">
+              {hours.display.map((h) => (
+                <li><span>{h.days}</span><span>{h.time}</span></li>
+              ))}
+            </ul>
+            {hours.exceptions.map((ex) => (
+              <p class="hours-exception"><strong>{ex.label}:</strong> {ex.detail}</p>
+            ))}
+          </div>
+
+          <div class="map-embed">
+            <iframe
+              title="Map to Tallow House"
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(site.location.mapQuery)}&z=15&output=embed`}
+              width="100%"
+              height="280"
+              style="border:0;"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap">
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            action="/thank-you"
+            class="contact-form"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p class="hidden-field">
+              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </p>
+
+            <div class="form-row">
+              <label for="c-name">Name</label>
+              <input type="text" id="c-name" name="name" required />
+            </div>
+
+            <div class="form-row">
+              <label for="c-email">Email</label>
+              <input type="email" id="c-email" name="email" required />
+            </div>
+
+            <div class="form-row">
+              <label for="c-message">Message</label>
+              <textarea id="c-message" name="message" rows="6" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .join-hero-grid { display: grid; gap: var(--space-10); align-items: center; }
+  .join-hero-script { font-size: var(--text-2xl); color: var(--sage-300); margin-bottom: var(--space-2); }
+  .join-headline {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 6rem);
+    color: var(--amber-400);
+    line-height: 0.95;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+  .join-subheadline {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    color: var(--sage-300);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    margin-top: var(--space-2);
+  }
+  .join-reqs {
+    margin-top: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .join-reqs li {
+    color: var(--cream-200);
+    font-size: var(--text-md);
+    padding-left: var(--space-4);
+    position: relative;
+  }
+  .join-reqs li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--sage-400);
+  }
+
+  .join-photo-strip {
+    display: grid;
+    gap: var(--space-3);
+    border: var(--border-medium) solid var(--sage-600);
+    padding: var(--space-3);
+  }
+  .join-photo-strip img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+
+  .app-form { display: flex; flex-direction: column; gap: var(--space-5); }
+  .hidden-field { position: absolute; left: -9999px; }
+  .form-row { display: flex; flex-direction: column; gap: var(--space-2); }
+  .form-row-split { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
+  .form-row label {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+  .form-row input,
+  .form-row select,
+  .form-row textarea {
+    border: var(--border-thin) solid var(--border-default);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    padding: var(--space-3);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+  }
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus { border-color: var(--focus-ring); }
+  .app-form .btn, .contact-form .btn { align-self: flex-start; margin-top: var(--space-2); }
+
+  .section-divider {
+    border: none;
+    border-top: var(--border-thin) solid var(--border-default);
+    margin: 0 var(--section-x);
+  }
+
+  .contact-desc { max-width: 60ch; margin-top: var(--space-4); color: var(--text-secondary); }
+
+  .contact-grid { display: grid; gap: var(--space-12); margin-top: var(--space-10); }
+  .contact-info { display: flex; flex-direction: column; gap: var(--space-8); }
+  .info-block p { color: var(--text-secondary); margin-top: var(--space-2); }
+  .info-block .h3 { margin-bottom: var(--space-1); }
+
+  .hours-list { margin-top: var(--space-2); display: flex; flex-direction: column; gap: var(--space-1); }
+  .hours-list li {
+    display: flex;
+    justify-content: space-between;
+    max-width: 26rem;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: var(--space-1);
+    color: var(--text-secondary);
+  }
+  .hours-exception { margin-top: var(--space-3); font-size: var(--text-sm); }
+
+  .map-embed {
+    border: var(--border-thin) solid var(--border-default);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: var(--space-5); }
+
+  @media (min-width: 800px) {
+    .join-hero-grid { grid-template-columns: 1.2fr 1fr; }
+    .form-row-split { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>

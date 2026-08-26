@@ -1,0 +1,593 @@
+---
+import site from '../data/site.json';
+import hours from '../data/hours.json';
+
+const navItems = [
+  { href: '/menu', label: 'Menu' },
+  { href: '/culture', label: 'Culture', accent: true },
+  { href: '/events', label: 'Events' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const scheduleJson = JSON.stringify(hours.schedule);
+const dayOrder = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+const dayLabels: Record<string, string> = {
+  sun: 'Sunday', mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday',
+  thu: 'Thursday', fri: 'Friday', sat: 'Saturday',
+};
+
+function to12h(hhmm: string): string {
+  const [h, m] = hhmm.split(':').map(Number);
+  const period = h >= 12 ? 'PM' : 'AM';
+  const hour12 = h % 12 === 0 ? 12 : h % 12;
+  return m === 0 ? `${hour12} ${period}` : `${hour12}:${String(m).padStart(2, '0')} ${period}`;
+}
+---
+
+<header class="site-header">
+  <div class="site-header-inner container">
+    <a href="/" class="brand" aria-label="Tallow House home">
+      <img src="/images/logo-mascot.webp" alt="" width="60" height="60" class="brand-mark" />
+    </a>
+
+    <button
+      class="hours-trigger"
+      id="hours-trigger"
+      aria-expanded="false"
+      aria-controls="hours-panel"
+    >
+      <span class="hours-trigger-dot" id="hours-dot"></span>
+      <span class="hours-trigger-label">Our Current Hours</span>
+      <span class="hours-trigger-status" id="hours-status">—</span>
+    </button>
+
+    <div class="header-actions">
+      <a
+        class="follow-pill"
+        href={site.social.instagram}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Follow On Instagram
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="full-nav">
+        <span class="nav-toggle-label">Menu</span>
+        <span class="nav-toggle-icon"><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="hours-panel" id="hours-panel" role="region" aria-label="Current hours">
+    <div class="hours-panel-inner">
+      <div class="hours-panel-grid">
+        <div class="hours-status-col">
+          <span class="hours-pill" id="hours-pill">—</span>
+          <span class="hours-countdown" id="hours-countdown">—</span>
+          <span class="hours-sticker script">Pull up.</span>
+        </div>
+
+        <div class="hours-table-col">
+          <p class="hours-table-label">This Week</p>
+          <ul class="hours-week">
+            {dayOrder.map((key) => (
+              <li data-day={key}>
+                <span class="hours-week-day">{dayLabels[key]}</span>
+                <span class="hours-week-time">
+                  {hours.schedule[key as keyof typeof hours.schedule]
+                    ? `${to12h(hours.schedule[key as keyof typeof hours.schedule]!.open)} – ${to12h(hours.schedule[key as keyof typeof hours.schedule]!.close)}`
+                    : 'Closed'}
+                </span>
+              </li>
+            ))}
+          </ul>
+          {hours.exceptions.map((ex) => (
+            <p class="hours-exception"><strong>{ex.label}:</strong> {ex.detail}</p>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav id="full-nav" class="full-nav" aria-label="Primary">
+    <div class="full-nav-inner container">
+      <ul class="full-nav-links">
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href} class="flip-link" class:list={{ 'flip-link--gold': item.accent }}>
+              <span class="flip-inner">
+                <span class="flip-line">{item.label}</span>
+                <span class="flip-line flip-line--accent">{item.label}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="full-nav-footer">
+        <div class="full-nav-social">
+          <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href={site.social.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
+        </div>
+        <span class="full-nav-est">EST {site.est} &middot; {site.areaCode}</span>
+      </div>
+    </div>
+    <div class="full-nav-visual" aria-hidden="true">
+      <img src="/images/nav-burger.webp" alt="" class="full-nav-burger" />
+    </div>
+</nav>
+
+<script define:vars={{ scheduleJson, timezone: hours.timezone }}>
+  const schedule = JSON.parse(scheduleJson);
+  const dayKeys = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+
+  function toMinutes(hhmm) {
+    const [h, m] = hhmm.split(':').map(Number);
+    return h * 60 + m;
+  }
+
+  function fmtClock(totalMinutes) {
+    const h = Math.floor(totalMinutes / 60);
+    const m = totalMinutes % 60;
+    if (h === 0) return `${m}m`;
+    return m === 0 ? `${h}h` : `${h}h ${m}m`;
+  }
+
+  function nowInTZ() {
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: timezone,
+      weekday: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).formatToParts(new Date());
+    const map = {};
+    parts.forEach((p) => { map[p.type] = p.value; });
+    const weekdayMap = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+    const dayIndex = weekdayMap[map.weekday];
+    let hour = parseInt(map.hour, 10);
+    if (hour === 24) hour = 0;
+    const minute = parseInt(map.minute, 10);
+    return { dayIndex, minutesNow: hour * 60 + minute };
+  }
+
+  function computeStatus() {
+    const { dayIndex, minutesNow } = nowInTZ();
+    const todayKey = dayKeys[dayIndex];
+    const today = schedule[todayKey];
+
+    if (today && minutesNow >= toMinutes(today.open) && minutesNow < toMinutes(today.close)) {
+      const minsLeft = toMinutes(today.close) - minutesNow;
+      return { open: true, countdown: fmtClock(minsLeft), todayKey };
+    }
+
+    // find next opening within the next 7 days
+    for (let offset = 0; offset < 8; offset++) {
+      const idx = (dayIndex + offset) % 7;
+      const key = dayKeys[idx];
+      const day = schedule[key];
+      if (!day) continue;
+      const openAt = toMinutes(day.open);
+      if (offset === 0 && minutesNow >= openAt) continue;
+      const minutesUntil = offset === 0
+        ? openAt - minutesNow
+        : (1440 - minutesNow) + (offset - 1) * 1440 + openAt;
+      return { open: false, countdown: fmtClock(minutesUntil), todayKey };
+    }
+    return { open: false, countdown: '—', todayKey };
+  }
+
+  function render() {
+    const { open, countdown, todayKey } = computeStatus();
+    const dot = document.getElementById('hours-dot');
+    const status = document.getElementById('hours-status');
+    const pill = document.getElementById('hours-pill');
+    const cd = document.getElementById('hours-countdown');
+    if (!dot || !status || !pill || !cd) return;
+
+    dot.classList.toggle('is-open', open);
+    dot.classList.toggle('is-closed', !open);
+    status.textContent = open ? `Open · ${countdown}` : `Closed · ${countdown}`;
+    pill.textContent = open ? 'OPEN' : 'CLOSED';
+    pill.classList.toggle('is-open', open);
+    cd.textContent = countdown;
+
+    document.querySelectorAll('.hours-week li').forEach((li) => {
+      li.classList.toggle('is-today', li.getAttribute('data-day') === todayKey);
+    });
+  }
+
+  // Astro's client router swaps in fresh DOM nodes on every navigation, so a
+  // one-time setup here would leave the new header's buttons with no
+  // listeners at all. "astro:page-load" fires on the very first load AND
+  // every subsequent transition, so this is registered ONLY via that
+  // listener — never called immediately too, or the first load would run
+  // setup twice and double-attach every click handler (which silently
+  // cancels itself out: open, then immediately close again).
+  let renderInterval;
+  let outsideClickHandler;
+
+  function initHeader() {
+    render();
+    if (renderInterval) clearInterval(renderInterval);
+    renderInterval = setInterval(render, 30000);
+
+    const hoursTrigger = document.getElementById('hours-trigger');
+    const hoursPanel = document.getElementById('hours-panel');
+    const navToggle = document.getElementById('nav-toggle');
+    const fullNav = document.getElementById('full-nav');
+
+    hoursTrigger?.addEventListener('click', () => {
+      const expanded = hoursTrigger.getAttribute('aria-expanded') === 'true';
+      hoursTrigger.setAttribute('aria-expanded', String(!expanded));
+      hoursPanel?.classList.toggle('open');
+    });
+
+    navToggle?.addEventListener('click', () => {
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!expanded));
+      fullNav?.classList.toggle('open');
+      document.body.classList.toggle('nav-open');
+    });
+
+    if (outsideClickHandler) document.removeEventListener('click', outsideClickHandler);
+    outsideClickHandler = (e) => {
+      if (!hoursPanel || !hoursTrigger) return;
+      if (hoursPanel.classList.contains('open') &&
+          !hoursPanel.contains(e.target) &&
+          !hoursTrigger.contains(e.target)) {
+        hoursPanel.classList.remove('open');
+        hoursTrigger.setAttribute('aria-expanded', 'false');
+      }
+    };
+    document.addEventListener('click', outsideClickHandler);
+  }
+
+  document.addEventListener('astro:page-load', initHeader);
+</script>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-nav, 40);
+  }
+
+  .site-header-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    height: var(--nav-height);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+  }
+
+  .brand { display: flex; flex-shrink: 0; }
+  .brand-mark { display: block; }
+
+  .hours-trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    background: none;
+    border: none;
+    color: var(--cream-100);
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+  .hours-trigger-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--char-400);
+    flex-shrink: 0;
+  }
+  .hours-trigger-dot.is-open {
+    background: var(--sage-400);
+    box-shadow: 0 0 0 3px rgba(111, 154, 122, 0.25);
+    animation: pulse-dot 2s infinite;
+  }
+  .hours-trigger-dot.is-closed { background: var(--rust-500); }
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(111, 154, 122, 0.25); }
+    50% { box-shadow: 0 0 0 6px rgba(111, 154, 122, 0.08); }
+  }
+  .hours-trigger-label { white-space: nowrap; }
+  .hours-trigger-status {
+    color: var(--sage-300);
+    display: none;
+  }
+  @media (min-width: 560px) {
+    .hours-trigger-status { display: inline; }
+  }
+  @media (max-width: 479px) {
+    .hours-trigger, .nav-toggle { font-size: var(--text-md); }
+  }
+
+  .header-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .follow-pill {
+    display: none;
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    background: var(--cream-100);
+    color: var(--char-900);
+    padding: var(--space-2) var(--space-6);
+    border-radius: var(--radius-full);
+    transition: var(--transition-colors);
+  }
+  .follow-pill:hover { background: var(--sage-300); }
+  @media (min-width: 700px) {
+    .follow-pill { display: inline-block; }
+  }
+
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    background: none;
+    border: none;
+    color: var(--cream-100);
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+  .nav-toggle-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 28px;
+  }
+  .nav-toggle-icon span {
+    display: block;
+    height: 2px;
+    background: currentColor;
+    transition: var(--transition-transform);
+  }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-icon span:first-child {
+    transform: translateY(3px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-icon span:last-child {
+    transform: translateY(-3px) rotate(-45deg);
+  }
+
+  /* ── Hours dropdown panel ── */
+  .hours-panel {
+    position: fixed;
+    top: calc(var(--nav-height) + var(--space-2));
+    left: var(--space-4);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height var(--duration-slow) var(--ease-default), opacity var(--duration-normal);
+    pointer-events: none;
+  }
+  .hours-panel.open {
+    max-height: 600px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .hours-panel-inner {
+    background: var(--char-800);
+    border: var(--border-thin) solid var(--char-600);
+    border-radius: 20px;
+    padding: var(--space-6);
+    width: min(620px, 92vw);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  }
+  .hours-panel-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  .hours-status-col {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+  .hours-pill {
+    font-family: var(--font-display);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wide);
+    padding: 3px var(--space-3);
+    border-radius: var(--radius-full);
+    background: var(--rust-800);
+    color: var(--rust-200);
+    flex-shrink: 0;
+  }
+  .hours-pill.is-open { background: var(--sage-800); color: var(--sage-200); }
+  .hours-countdown {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    line-height: 1;
+    color: var(--cream-100);
+  }
+  .hours-sticker {
+    background: var(--sage-700);
+    color: var(--cream-50);
+    padding: 2px var(--space-3);
+    border-radius: var(--radius-full);
+    font-size: var(--text-lg);
+    transform: rotate(-6deg);
+  }
+
+  .hours-table-col {
+    border-top: var(--border-thin) solid var(--char-600);
+    padding-top: var(--space-4);
+  }
+  .hours-table-label {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+    color: var(--sage-300);
+    margin-bottom: var(--space-3);
+  }
+  .hours-week { display: flex; flex-direction: column; gap: var(--space-1); }
+  .hours-week li {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--text-sm);
+    color: var(--cream-400);
+    padding: var(--space-1) 0;
+    border-bottom: 1px solid var(--char-700);
+  }
+  .hours-week li.is-today {
+    color: var(--cream-100);
+    font-weight: var(--weight-medium);
+  }
+  .hours-week li.is-today .hours-week-day::before {
+    content: '● ';
+    color: var(--sage-400);
+  }
+  .hours-exception {
+    margin-top: var(--space-3);
+    font-size: var(--text-xs);
+    color: var(--amber-300);
+    white-space: pre-line;
+  }
+  @media (min-width: 640px) {
+    .hours-panel-grid { grid-template-columns: auto 1fr; align-items: flex-start; }
+    .hours-status-col { flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+    .hours-table-col { border-top: none; border-left: var(--border-thin) solid var(--char-600); padding-top: 0; padding-left: var(--space-6); }
+  }
+
+  /* ── Full-screen nav overlay ──
+     Opens like a shade being pulled down: a solid sage panel slides in from
+     above (transform), and its own background color resolves to black
+     slightly faster than the slide finishes — so the green flashes through
+     on the way down (and again on the way back up when closing). */
+  .full-nav {
+    position: fixed;
+    inset: 0;
+    z-index: calc(var(--z-nav, 40) - 1);
+    height: 100vh;
+    overflow: hidden;
+    background: var(--sage-600);
+    transform: translateY(-100%);
+    transition: transform 0.85s cubic-bezier(0.65, 0, 0.35, 1), background-color 0.6s ease-in;
+  }
+  .full-nav.open {
+    transform: translateY(0);
+    background: var(--char-950);
+    transition: transform 0.85s cubic-bezier(0.65, 0, 0.35, 1), background-color 0.7s ease-out 0.1s;
+  }
+  .full-nav-inner {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: var(--nav-height);
+    padding-bottom: var(--space-10);
+  }
+  .full-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 60%;
+  }
+  .flip-link {
+    display: block;
+    overflow: hidden;
+    height: 0.9em;
+    font-family: 'Archivo', var(--font-display), sans-serif;
+    font-weight: 700;
+    font-size: clamp(3rem, 8.5vw, 6.75rem);
+    line-height: 0.9;
+    letter-spacing: normal;
+    text-transform: uppercase;
+  }
+  .flip-inner {
+    display: block;
+    transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .flip-link:hover .flip-inner {
+    transform: translateY(-50%);
+  }
+  .flip-line {
+    display: block;
+    height: 0.9em;
+    color: var(--cream-100);
+  }
+  .flip-line--accent {
+    color: var(--sage-400);
+  }
+  .flip-link--gold .flip-line { color: var(--amber-300); }
+  .flip-link--gold .flip-line--accent { color: var(--sage-400); }
+
+  .full-nav-visual {
+    position: absolute;
+    top: 50%;
+    right: 6%;
+    transform: translateY(-50%);
+    z-index: 0;
+    width: 34vw;
+    max-width: 480px;
+    pointer-events: none;
+  }
+  .full-nav-burger {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6));
+    animation: nav-burger-float 4.5s ease-in-out infinite;
+  }
+  @keyframes nav-burger-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-22px); }
+  }
+  @media (max-width: 899px) {
+    .full-nav-visual { display: none; }
+    .full-nav-links { max-width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .full-nav-burger { animation: none; }
+  }
+
+  .full-nav-footer {
+    position: relative;
+    z-index: 1;
+    margin-top: var(--space-12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+  .full-nav-social {
+    display: flex;
+    gap: var(--space-6);
+  }
+  .full-nav-social a {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--cream-400);
+  }
+  .full-nav-social a:hover { color: var(--sage-300); }
+  .full-nav-est {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-widest);
+    color: var(--char-400);
+  }
+
+  :global(body.nav-open) {
+    overflow: hidden;
+  }
+</style>

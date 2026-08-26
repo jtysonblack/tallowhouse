@@ -1,0 +1,97 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Grain from '../components/Grain.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  showFooter?: boolean;
+}
+
+const {
+  title,
+  description,
+  image = '/images/hero-storefront-night.jpg',
+  showFooter = true,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/images/logo-mascot.png" />
+    <link rel="canonical" href={canonicalURL} />
+    <ViewTransitions />
+
+    <title>{title} | Tallow House</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | Tallow House`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:site_name" content="Tallow House" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} | Tallow House`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <meta name="theme-color" content="#264A38" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Grain />
+    <div class="page-flash" id="page-flash"></div>
+    <Header />
+    <main id="main" transition:animate="fade">
+      <slot />
+    </main>
+    {showFooter && <Footer />}
+  </body>
+</html>
+
+<style>
+  .page-flash {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--sage-600);
+    pointer-events: none;
+    opacity: 0;
+  }
+  .page-flash.is-active {
+    animation: page-flash-wipe 0.5s var(--ease-default, ease) forwards;
+  }
+  @keyframes page-flash-wipe {
+    0%   { opacity: 0; }
+    35%  { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .page-flash.is-active { animation: none; }
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:before-swap', () => {
+    const flash = document.getElementById('page-flash');
+    if (!flash) return;
+    flash.classList.remove('is-active');
+    // eslint-disable-next-line no-void
+    void flash.offsetWidth;
+    flash.classList.add('is-active');
+  });
+</script>

@@ -1,0 +1,23 @@
+{
+  "name": "Tallow House",
+  "tagline": "Pure Smashburgers. The way it should be.",
+  "location": {
+    "line1": "4602 N Lee Hwy",
+    "line2": "Cleveland, TN",
+    "mapQuery": "4602 N Lee Hwy, Cleveland, TN 37312"
+  },
+  "social": {
+    "instagram": "https://www.instagram.com/tallowhouseburger",
+    "instagramHandle": "@tallowhouseburger",
+    "facebook": "https://www.facebook.com/tallowhouseburger",
+    "tiktokSearch": "Tallow House Cleveland TN"
+  },
+  "founder": "Nathan Zakkas",
+  "pillars": [
+    "Pure Smashburgers",
+    "Sourdough Buns Baked Daily",
+    "Handcut Tallow Fries"
+  ],
+  "est": "2026",
+  "areaCode": "423"
+}

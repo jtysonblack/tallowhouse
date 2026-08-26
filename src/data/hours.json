@@ -1,0 +1,24 @@
+{
+  "timezone": "America/New_York",
+  "schedule": {
+    "sun": null,
+    "mon": { "open": "16:00", "close": "21:00" },
+    "tue": { "open": "16:00", "close": "21:00" },
+    "wed": { "open": "16:00", "close": "21:00" },
+    "thu": { "open": "16:00", "close": "21:00" },
+    "fri": { "open": "11:00", "close": "16:00" },
+    "sat": { "open": "11:00", "close": "16:00" }
+  },
+  "display": [
+    { "days": "Monday – Thursday", "time": "4:00 PM – 9:00 PM" },
+    { "days": "Friday – Saturday", "time": "11:00 AM – 4:00 PM" },
+    { "days": "Sunday", "time": "Closed" }
+  ],
+  "exceptions": [
+    {
+      "label": "Late Night Pop-Up",
+      "detail": "Select Saturdays, 8PM–SELLOUT.\nWatch Instagram for the announcement."
+    }
+  ],
+  "note": "Hours shift with the season and special events — Instagram (@tallowhouseburger) always has the current word."
+}

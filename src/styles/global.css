@@ -1,0 +1,224 @@
+@import './tokens.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@700;800;900&family=Permanent+Marker&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+img, picture, video, svg { display: block; max-width: 100%; }
+input, button, textarea, select { font: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-page);
+  color: var(--text-primary);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+main { padding-top: var(--nav-height); }
+
+:root {
+  --nav-height: 92px;
+  /* Reference site's ground is literally rgb(0,0,0). The token system's default
+     char-900/950 read as dark grey next to it once grain is layered on top. */
+  --char-950: #000000;
+  --char-900: #000000;
+  --char-800: #0d0d0d;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  line-height: var(--leading-tight);
+}
+
+/* ── Script accent voice — sparing, humanizing ── */
+.script {
+  font-family: 'Permanent Marker', cursive;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+/* ── Layout helpers ── */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--section-x);
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+  padding-inline: var(--section-x);
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+.section-dark {
+  background: var(--char-900);
+  color: var(--cream-200);
+}
+
+.section-dark .text-secondary { color: var(--cream-500); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ── Type utility classes ── */
+.h1 {
+  font-size: var(--type-h1-size);
+  font-weight: var(--type-h1-weight);
+  letter-spacing: var(--type-h1-tracking);
+}
+.h2 {
+  font-size: var(--type-h2-size);
+  font-weight: var(--type-h2-weight);
+  letter-spacing: var(--type-h2-tracking);
+}
+.h3 {
+  font-size: var(--type-h3-size);
+  font-weight: var(--type-h3-weight);
+  letter-spacing: var(--type-h3-tracking);
+}
+.body-lg {
+  font-size: var(--type-body-lg-size);
+  line-height: var(--type-body-lg-leading);
+}
+
+/* ── Buttons ── */
+.btn {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  padding: var(--space-3) var(--space-8);
+  border-radius: var(--radius-sm);
+  border: var(--border-medium) solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  transition: var(--transition-colors), var(--transition-transform);
+  line-height: 1;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border-color: var(--btn-primary-bg);
+}
+.btn-primary:hover { background: var(--btn-primary-hover); border-color: var(--btn-primary-hover); }
+
+.btn-secondary {
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border-color: var(--btn-secondary-border);
+}
+.btn-secondary:hover { background: var(--btn-secondary-hover); }
+
+.btn-accent {
+  background: var(--btn-accent-bg);
+  color: var(--btn-accent-text);
+  border-color: var(--btn-accent-bg);
+}
+.btn-accent:hover { background: var(--btn-accent-hover); border-color: var(--btn-accent-hover); }
+
+/* ── Pillar badges — bordered box motif from social media ── */
+.pillars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.pillar {
+  border: var(--border-medium) solid currentColor;
+  color: var(--border-brand);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  line-height: 1.2;
+}
+.section-dark .pillar { color: var(--amber-300); }
+
+/* ── Numbered menu grid item ── */
+.menu-item {
+  position: relative;
+  border: var(--border-thin) solid var(--border-default);
+}
+.menu-item .menu-item-number {
+  position: absolute;
+  top: 0; left: 0;
+  background: var(--char-900);
+  color: var(--cream-100);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  padding: 2px var(--space-2);
+  z-index: 2;
+}
+.menu-item .menu-item-price {
+  position: absolute;
+  top: 0; right: 0;
+  background: var(--char-900);
+  color: var(--amber-300);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  padding: 2px var(--space-2);
+  z-index: 2;
+}
+.menu-item-name {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  text-align: center;
+  padding: var(--space-2);
+  border-top: var(--border-thin) solid var(--border-default);
+  background: var(--bg-card);
+}
+
+/* ── Focus ── */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* ── Skip link ── */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--sage-700);
+  color: var(--cream-50);
+  padding: var(--space-2) var(--space-4);
+  z-index: var(--z-toast);
+}
+.skip-link:focus {
+  left: var(--space-4);
+  top: var(--space-4);
+}

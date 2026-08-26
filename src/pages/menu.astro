@@ -1,0 +1,171 @@
+---
+import Layout from '../layouts/Layout.astro';
+import menu from '../data/menu.json';
+
+const categories = [
+  { id: 'burgers', label: 'Burgers', data: menu.burgers },
+  { id: 'sides', label: 'Fries', data: menu.sides },
+];
+
+const photos: Record<string, string> = {
+  'Single Smashburger': '/images/menu-single.webp',
+  'Double Smashburger': '/images/menu-double.webp',
+  'Triple Smashburger': '/images/menu-triple.webp',
+  'Hand-Cut Tallow Fries': '/images/menu-tallow-fries.webp',
+  'Loaded Tallow Fries': '/images/menu-loaded-fries.webp',
+  'Extra Sauce': '/images/menu-tallow-fries.webp',
+};
+---
+
+<Layout
+  title="Menu"
+  description="One Smashburger, One Way, The Way. Grassfed beef, sourdough baked daily, hand-cut tallow fries. Simple, intentional, done perfectly."
+>
+  {categories.map((cat) => (
+    <section class="category-section" id={cat.id}>
+      <div class="container">
+        <h1 class="category-heading">{cat.label}</h1>
+
+        <div class="category-grid">
+          {cat.data.items.map((item) => (
+            <div class="menu-card">
+              <img src={photos[item.name]} alt={item.name} loading="lazy" class="menu-card-photo" />
+              <div class="menu-card-details">
+                <div class="menu-card-head">
+                  <h2 class="menu-card-name">{item.name}</h2>
+                  <p class="menu-card-price">{item.price}</p>
+                </div>
+                <p class="menu-card-desc">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section process-section section-dark">
+    <div class="container process-grid">
+      <div class="process-media">
+        <img src="/images/menu-crew.webp" alt="The Tallow House crew at work behind the counter" loading="lazy" />
+      </div>
+      <div class="process-copy">
+        <h2 class="h2">One Smashburger, One Way.</h2>
+        <p class="body-lg">
+          Grassfed beef, smashed hot on the flat top until the edges go dark and crispy.
+          Sourdough buns baked daily, in-house. Fries hand-cut from whole potatoes and
+          cooked in beef tallow — no seed oils anywhere on the menu. Real ingredients,
+          served with zero pretense.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section menu-cta">
+    <div class="container menu-cta-inner">
+      <p class="script menu-cta-script">No online ordering. No call-ins.</p>
+      <h2 class="h2">Come See Us.</h2>
+      <a
+        href="https://maps.google.com/?q=4602+N+Lee+Hwy+Cleveland+TN"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-primary"
+      >Get Directions →</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .category-section { padding-block: var(--space-16); }
+  .category-heading {
+    font-family: 'Archivo', var(--font-display), sans-serif;
+    font-weight: 700;
+    letter-spacing: normal;
+    font-size: clamp(3.5rem, 13vw, 8.4rem);
+    line-height: 0.9;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: var(--space-12);
+  }
+  .menu-card {
+    position: relative;
+    border-radius: 36px;
+    overflow: hidden;
+    aspect-ratio: 7/8;
+  }
+  .menu-card-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .menu-card-details {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    height: 172px;
+    background: var(--cream-50);
+    border-radius: 24px;
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .menu-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-3);
+  }
+  .menu-card-name {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--char-900);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .menu-card-price {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--char-900);
+    flex-shrink: 0;
+  }
+  .menu-card-desc {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: var(--char-600);
+    margin-top: var(--space-1);
+  }
+
+  .process-grid { display: grid; gap: var(--space-10); }
+  .process-media img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 28px; }
+  .process-copy { display: flex; flex-direction: column; justify-content: center; }
+  .process-copy .h2 { margin: var(--space-2) 0 var(--space-4); }
+  .process-copy .body-lg { color: var(--cream-300); }
+
+  .menu-cta { background: var(--bg-brand); color: var(--text-on-brand); text-align: center; }
+  .menu-cta-inner { display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
+  .menu-cta-script { font-size: var(--text-3xl); color: var(--amber-200); }
+
+  @media (min-width: 700px) {
+    .category-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  }
+  @media (min-width: 800px) {
+    .process-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+import site from '../data/site.json';
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <h2 class="footer-wordmark">
+      <svg viewBox="0 0 1000 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <text x="0" y="157" textLength="1000" lengthAdjust="spacingAndGlyphs">TALLOW HOUSE</text>
+      </svg>
+      <span class="visually-hidden">Tallow House</span>
+    </h2>
+
+    <div class="footer-row">
+      <div class="footer-legal">
+        <span>Copyright Tallow House {site.est}</span>
+        <span>Built By Cairn</span>
+      </div>
+      <div class="footer-social">
+        <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href={site.social.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding: 4px 0 100px;
+  }
+
+  .footer-wordmark {
+    width: 100%;
+    margin-bottom: var(--space-8);
+  }
+  .footer-wordmark svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .footer-wordmark text {
+    font-family: 'Archivo', var(--font-display), sans-serif;
+    font-weight: 800;
+    font-size: 145px;
+    fill: var(--cream-100);
+  }
+
+  .footer-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .footer-legal {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--cream-500);
+  }
+
+  .footer-social {
+    display: flex;
+    gap: var(--space-6);
+  }
+  .footer-social a {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--cream-100);
+    transition: var(--transition-colors);
+  }
+  .footer-social a:hover {
+    color: var(--sage-400);
+  }
+
+  @media (min-width: 700px) {
+    .footer-row {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-legal {
+      flex-direction: row;
+      gap: var(--space-6);
+    }
+  }
+</style>

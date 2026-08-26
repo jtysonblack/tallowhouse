@@ -1,0 +1,230 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pastEvents = [
+  {
+    image: '/images/community-hats-storefront.jpg',
+    name: 'The Drop Initiative',
+    detail: 'Free burgers, anti-drug awareness — partnered with ATS The Bridge at the Old Woolen Mill, Cleveland.',
+  },
+  {
+    image: '/images/community-carmeet-night.jpg',
+    name: 'Car Meets',
+    detail: 'The lot fills up with sports cars, motorcycles, and the community that shows up for it.',
+  },
+  {
+    image: '/images/community-dj-tent.jpg',
+    name: 'DJ Nights',
+    detail: 'DJ IDK on the decks for late-night service events — 8PM–SELLOUT energy.',
+  },
+  {
+    image: '/images/community-police-carmeet.jpg',
+    name: 'Bless Yer Heart Takeover',
+    detail: '233 E MLK Blvd, Chattanooga — a full brand takeover with a custom menu and drink program.',
+  },
+  {
+    image: '/images/community-crowd-family.jpg',
+    name: 'Hoptown Beer Bar Southside',
+    detail: '1617 Rossville Ave, Chattanooga — bringing Cleveland\'s favorite burger south.',
+  },
+  {
+    image: '/images/community-kitchen-laugh.jpg',
+    name: 'Late-Night Pop-Ups',
+    detail: 'Select Saturday nights, 8PM–SELLOUT. No end time — just come before it runs out.',
+  },
+];
+---
+
+<Layout
+  title="Events"
+  description="Book Tallow House for your next event — private parties, corporate events, and collabs. See past events: The Drop Initiative, car meets, DJ nights, and the Chattanooga takeovers."
+>
+  <section class="section events-hero section-dark">
+    <div class="container">
+      <h1 class="h1">Events</h1>
+      <p class="body-lg events-hero-desc">
+        Since day one, Tallow House has been more than a counter — car meets, DJ nights,
+        community give-backs, and full brand takeovers in Chattanooga. We bring the same
+        energy to private parties, corporate events, and collabs.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-dark events-form-section">
+    <div class="container">
+      <h2 class="h2">Let's Talk.</h2>
+      <p class="body-lg events-form-desc">
+        Tell us what you're planning and we'll follow up. The more detail, the better.
+      </p>
+
+      <form
+        name="event-inquiry"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        action="/thank-you"
+        class="mac-form"
+      >
+        <input type="hidden" name="form-name" value="event-inquiry" />
+        <p class="hidden-field">
+          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        </p>
+
+        <label for="ev-name" class="visually-hidden">Full Name</label>
+        <input class="mac-field-third" type="text" id="ev-name" name="name" placeholder="Full Name" required />
+
+        <label for="ev-phone" class="visually-hidden">Phone</label>
+        <input class="mac-field-third" type="tel" id="ev-phone" name="phone" placeholder="Phone" required />
+
+        <label for="ev-email" class="visually-hidden">Email</label>
+        <input class="mac-field-third" type="email" id="ev-email" name="email" placeholder="Email" required />
+
+        <label for="ev-type" class="visually-hidden">Event Type</label>
+        <select class="mac-field-third" id="ev-type" name="event_type" required>
+          <option value="">Event Type</option>
+          <option>Private Party</option>
+          <option>Corporate Event</option>
+          <option>Wedding / Celebration</option>
+          <option>Community Collab</option>
+          <option>Other</option>
+        </select>
+
+        <label for="ev-date" class="visually-hidden">Event Date</label>
+        <input class="mac-field-third" type="date" id="ev-date" name="event_date" placeholder="Event Date" />
+
+        <label for="ev-location" class="visually-hidden">Event Location</label>
+        <input class="mac-field-third" type="text" id="ev-location" name="event_location" placeholder="Event Location" />
+
+        <label for="ev-details" class="visually-hidden">Details</label>
+        <textarea id="ev-details" name="details" rows="5" placeholder="Guest count, timing, what you have in mind..." required></textarea>
+
+        <button type="submit" class="mac-submit">
+          Send Inquiry
+          <svg class="mac-submit-arrow" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M42 2 L78 30 L42 58" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M0 30 H74" stroke="currentColor" stroke-width="9" stroke-linecap="round" />
+          </svg>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section section-dark past-events-section">
+    <div class="container">
+      <h2 class="h2">We've Been Busy.</h2>
+      <div class="past-events-grid">
+        {pastEvents.map((ev) => (
+          <div class="past-event-card">
+            <img src={ev.image} alt={ev.name} loading="lazy" />
+            <h3 class="h3">{ev.name}</h3>
+            <p>{ev.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .events-hero { text-align: right; }
+  .events-hero-desc { max-width: 60ch; margin-top: var(--space-4); margin-left: auto; color: var(--cream-400); }
+
+  .events-form-desc { max-width: 60ch; margin-top: var(--space-3); color: var(--cream-400); }
+
+  .mac-form {
+    margin-top: var(--space-10);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(14px, 2.5vw, 28px);
+  }
+  .hidden-field { position: absolute; left: -9999px; }
+
+  .mac-form input,
+  .mac-form select {
+    grid-column: span 3;
+    width: 100%;
+    border: none;
+    background: var(--cream-50);
+    color: var(--char-900);
+    padding: clamp(16px, 2vw, 22px) clamp(20px, 3vw, 32px);
+    border-radius: var(--radius-full);
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    font-weight: var(--weight-medium);
+    appearance: none;
+  }
+  .mac-form select { color: var(--char-600); }
+  .mac-form select:valid { color: var(--char-900); }
+  .mac-form input::placeholder { color: var(--char-400); }
+  .mac-form input:focus,
+  .mac-form select:focus,
+  .mac-form textarea:focus { outline: 2px solid var(--sage-400); outline-offset: 2px; }
+
+  .mac-form textarea {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-height: 180px;
+    resize: vertical;
+    border: none;
+    background: var(--cream-50);
+    color: var(--char-900);
+    padding: clamp(16px, 2vw, 22px) clamp(20px, 3vw, 32px);
+    border-radius: var(--radius-xl);
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    font-weight: var(--weight-medium);
+  }
+  .mac-form textarea::placeholder { color: var(--char-400); }
+
+  .mac-submit {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(10px, 2vw, 24px);
+    width: 100%;
+    margin-top: var(--space-2);
+    padding: clamp(20px, 4vw, 40px) clamp(16px, 3vw, 32px);
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--sage-500);
+    color: var(--char-950);
+    cursor: pointer;
+    font-family: 'Archivo', var(--font-display), sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    line-height: 1;
+    transition: var(--transition-colors);
+  }
+  .mac-submit:hover { background: var(--sage-400); }
+  .mac-submit-arrow {
+    width: clamp(28px, 5vw, 56px);
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 700px) {
+    .mac-form .mac-field-third { grid-column: span 1; }
+  }
+
+  .past-events-grid {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-10);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  .past-event-card img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-4);
+  }
+  .past-event-card p { color: var(--cream-400); margin-top: var(--space-2); font-size: var(--text-sm); }
+
+  @media (min-width: 700px) {
+    .form-row-split { grid-template-columns: 1fr 1fr; }
+  }
+</style>

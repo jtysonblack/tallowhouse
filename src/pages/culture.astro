@@ -1,0 +1,287 @@
+---
+import Layout from '../layouts/Layout.astro';
+import site from '../data/site.json';
+
+const community = [
+  { image: '/images/community-hats-storefront.webp', name: 'The Drop Initiative', detail: 'Free burgers, anti-drug awareness — partnered with ATS The Bridge at the Old Woolen Mill.' },
+  { image: '/images/community-dj-tent.webp', name: 'Car Meets', detail: 'The parking lot fills up. Sports cars, motorcycles, the community showing out.' },
+  { image: '/images/community-police-carmeet.webp', name: 'DJ Nights', detail: 'DJ IDK on the decks, late-night service, the energy of a drop.' },
+];
+
+const behindTheBurger = [
+  { image: '/images/culture-founder.webp', name: 'The Founder', detail: 'Meet Nathan Zakkas, owner and founder. Public-facing, hands-on, and still works the grill.' },
+  { image: '/images/culture-crew.webp', name: 'The Crew', detail: 'Green aprons, black bandanas, high-volume nights. The family that makes it happen.' },
+  { image: '/images/culture-collabs.webp', name: 'The Collabs', detail: 'Bless Yer Heart, Hoptown Beer Bar  — real partnerships, full brand takeovers.' },
+];
+---
+
+<Layout
+  title="Culture"
+  description="Building a brand, not just a burger place. Nathan Zakkas and the Tallow House family — community, car meets, DJ nights, and the Drop Initiative in Cleveland, TN."
+>
+  <section class="culture-hero">
+    <img src="/images/community-carmeet-night.jpg" alt="Crowd outside Tallow House at a night event" class="culture-hero-photo" />
+    <div class="culture-hero-scrim"></div>
+    <h1 class="culture-wordmark">Tallow<br />House</h1>
+  </section>
+
+  <section class="section culture-story">
+    <div class="container-narrow">
+      <p class="body-lg">
+        "I'm building a brand, not just a burger place." That's the whole thesis.
+        Founder Nathan Zakkas set out to bring something Cleveland, TN hadn't seen —
+        the energy of a streetwear drop, the soul of a neighborhood cookout, and a
+        menu with the confidence to stay small on purpose. He's still working the
+        grill most nights the lights are on.
+      </p>
+    </div>
+  </section>
+
+  <section class="section meet-section">
+    <div class="container">
+      <div class="meet-head">
+        <h2 class="meet-heading">
+          <span class="reveal-word">Behind</span>
+          <span class="reveal-word">The</span>
+          <span class="reveal-word">Burger</span>
+        </h2>
+      </div>
+      <div class="meet-grid">
+        {behindTheBurger.map((item) => (
+          <div class="meet-card">
+            <div class="meet-card-imgwrap">
+              <img src={item.image} alt={item.name} loading="lazy" class="parallax-img" />
+            </div>
+            <h3 class="h3 reveal-up">{item.name}</h3>
+            <p class="reveal-up">{item.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section community-section">
+    <div class="container">
+      <h2 class="h2">Join The Movement.</h2>
+      <div class="community-grid">
+        {community.map((item) => (
+          <div class="community-card">
+            <div class="community-card-imgwrap">
+              <img src={item.image} alt={item.name} loading="lazy" class="parallax-img" />
+            </div>
+            <h3 class="h3">{item.name}</h3>
+            <p>{item.detail}</p>
+          </div>
+        ))}
+      </div>
+      <a href="/events" class="btn btn-secondary" style="margin-top: var(--space-8);">See Our Events →</a>
+    </div>
+  </section>
+
+  <section class="section culture-cta">
+    <div class="container culture-cta-inner">
+      <p class="script culture-cta-script">We want people to feel like they're part of something.</p>
+      <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        Instagram {site.social.instagramHandle} →
+      </a>
+    </div>
+  </section>
+
+  <section class="culture-big-photo">
+    <img src="/images/culture-drone.webp" alt="Aerial view of a Tallow House car meet, packed lot at night" class="parallax-img" loading="lazy" />
+    <div class="culture-big-photo-scrim"></div>
+    <img src="/images/logo-mascot.webp" alt="" class="culture-big-photo-mark" />
+  </section>
+</Layout>
+
+<style>
+  .culture-hero {
+    position: relative;
+    margin-top: calc(-1 * var(--nav-height));
+    min-height: 70svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .culture-hero-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .culture-hero-scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 6, 5, 0.45);
+  }
+  .culture-wordmark {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(4rem, 18vw, 11rem);
+    line-height: 0.85;
+    text-align: center;
+    color: var(--cream-50);
+    mix-blend-mode: overlay;
+    opacity: 0.95;
+  }
+
+  .culture-story .body-lg { color: var(--text-secondary); }
+
+  .meet-head { margin-bottom: var(--space-10); }
+  .meet-heading {
+    font-family: 'Archivo', var(--font-display), sans-serif;
+    font-weight: 900;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    font-size: clamp(2.75rem, 9vw, 6.25rem);
+    line-height: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.35em;
+  }
+  .reveal-word {
+    display: inline-block;
+    transform: translateY(40px);
+    opacity: 0;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease;
+  }
+  .reveal-word:nth-child(2) { transition-delay: 0.08s; }
+  .reveal-word:nth-child(3) { transition-delay: 0.16s; }
+  .reveal-word.is-visible { transform: translateY(0); opacity: 1; }
+
+  .meet-grid {
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+  .meet-card-imgwrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    aspect-ratio: 5/7;
+    margin-bottom: var(--space-4);
+  }
+  .meet-card-imgwrap .parallax-img {
+    position: absolute;
+    top: -8%;
+    left: 0;
+    width: 100%;
+    height: 116%;
+    object-fit: cover;
+    will-change: transform;
+  }
+  .meet-card .reveal-up {
+    transform: translateY(24px);
+    opacity: 0;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+  }
+  .meet-card .reveal-up.is-visible { transform: translateY(0); opacity: 1; }
+  .meet-card p { color: var(--text-secondary); margin-top: var(--space-2); }
+
+  .community-grid {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-10);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .community-card-imgwrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    aspect-ratio: 4/3;
+    margin-bottom: var(--space-4);
+  }
+  .community-card-imgwrap .parallax-img {
+    position: absolute;
+    top: -8%;
+    left: 0;
+    width: 100%;
+    height: 116%;
+    object-fit: cover;
+    will-change: transform;
+  }
+  .community-card h3 { margin-top: var(--space-3); }
+  .community-card p { color: var(--text-secondary); margin-top: var(--space-2); font-size: var(--text-sm); }
+
+  .culture-cta { background: var(--bg-brand); color: var(--text-on-brand); text-align: center; }
+  .culture-cta-inner { display: flex; flex-direction: column; align-items: center; gap: var(--space-5); }
+  .culture-cta-script { font-size: var(--text-2xl); color: var(--amber-200); max-width: 30ch; }
+
+  .culture-big-photo {
+    position: relative;
+    height: 70svh;
+    overflow: hidden;
+  }
+  .culture-big-photo .parallax-img {
+    position: absolute;
+    top: -10%;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    object-fit: cover;
+    will-change: transform;
+  }
+  .culture-big-photo-scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 4, 3, 0.4);
+  }
+  .culture-big-photo-mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(220px, 30vw);
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.6));
+  }
+</style>
+
+<script>
+  // Re-run on every "astro:page-load" (fires on first load too) so this still
+  // works after navigating here via a client-side transition.
+  let revealObserver: IntersectionObserver | undefined;
+  let rafId: number | undefined;
+
+  function initScrollEffects() {
+    const parallaxEls = Array.from(document.querySelectorAll<HTMLElement>('.parallax-img'));
+    const state = parallaxEls.map(() => ({ current: 0 }));
+
+    function tick() {
+      parallaxEls.forEach((el, i) => {
+        const wrap = el.parentElement;
+        if (!wrap) return;
+        const rect = wrap.getBoundingClientRect();
+        const viewportCenter = window.innerHeight / 2;
+        const elementCenter = rect.top + rect.height / 2;
+        const target = (elementCenter - viewportCenter) * 0.12;
+        const s = state[i];
+        const next = s.current + (target - s.current) * 0.07;
+        s.current = next;
+        el.style.transform = `translateY(${next.toFixed(2)}px)`;
+      });
+      rafId = requestAnimationFrame(tick);
+    }
+
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(tick);
+
+    const revealEls = document.querySelectorAll('.reveal-word, .reveal-up');
+    revealObserver?.disconnect();
+    revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver?.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    revealEls.forEach((el) => revealObserver!.observe(el));
+  }
+
+  document.addEventListener('astro:page-load', initScrollEffects);
+</script>

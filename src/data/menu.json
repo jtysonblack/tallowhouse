@@ -1,0 +1,19 @@
+{
+  "burgers": {
+    "title": "Smashburgers",
+    "description": "Double grassfed patty, cheddar, grilled onions, pickles, house sauce. Sourdough buns baked daily. One way, the way.",
+    "items": [
+      { "number": "01", "name": "Single Smashburger", "price": "$8", "description": "Grassfed patty, cheddar, grilled onions, pickles, house sauce on sourdough baked daily." },
+      { "number": "02", "name": "Double Smashburger", "price": "$11", "description": "Double grassfed patty, cheddar, grilled onions, pickles, house sauce on sourdough baked daily." },
+      { "number": "03", "name": "Triple Smashburger", "price": "$14", "description": "Triple grassfed patty, cheddar, grilled onions, pickles, house sauce on sourdough baked daily." }
+    ]
+  },
+  "sides": {
+    "title": "Sides",
+    "items": [
+      { "number": "04", "name": "Loaded Tallow Fries", "price": "$13", "description": "Hand-cut tallow fries piled with house toppings and sauce." },
+      { "number": "05", "name": "Hand-Cut Tallow Fries", "price": "$4", "description": "Whole potatoes, cut by hand, cooked in beef tallow. No seed oils, anywhere." },
+      { "number": "06", "name": "Extra Sauce", "price": "$1", "description": "Spicy ketchup or house sauce, on the side." }
+    ]
+  }
+}

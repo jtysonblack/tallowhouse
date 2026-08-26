@@ -1,0 +1,494 @@
+/* ═══════════════════════════════════════════════════════════
+   TALLOW HOUSE — Design Tokens
+   Fresh build. Palette extracted from event + food photography.
+
+   Photography palette anchors:
+     Sage backdrop  #4D7158 → #789E80
+     Bun/cheese     #C5A25B → #A3722E
+     Charred crust  #3F270D → #492B0E
+     Chalkboard     #090609 → #1D1813
+     Comfort tee    #D3D2C4 → #ECEEEA
+
+   Fonts: Teko (display) + Work Sans (body)
+   Vibe:  Raw, gritty, community. Chalkboard + streetwear.
+   ═══════════════════════════════════════════════════════════ */
+
+
+/* ──────────────────────────────────────────────────────────
+   1. COLOR PRIMITIVES
+   Extracted from photography. Never reference directly in
+   components — use semantic tokens (section 2).
+   ────────────────────────────────────────────────────────── */
+
+:root {
+
+  /* ── Sage (Primary) ──
+     The signature backdrop green. Muted, dusty, lived-in.
+     Pulled from every food photo and the merch ink color. */
+  --sage-950: #0E1D14;
+  --sage-900: #1A3327;
+  --sage-800: #264A38;
+  --sage-700: #35604C;
+  --sage-600: #4D7158;
+  --sage-500: #5E8668;
+  --sage-400: #6F9A7A;
+  --sage-300: #89AE93;
+  --sage-200: #A8C4AF;
+  --sage-100: #CDDDD1;
+  --sage-50:  #E8F0EA;
+
+  /* ── Amber (Warm accent) ──
+     Toasted buns, melted cheddar, house sauce drizzle,
+     the golden hour glow on everything. */
+  --amber-950: #1C1206;
+  --amber-900: #35230E;
+  --amber-800: #573A16;
+  --amber-700: #7A5220;
+  --amber-600: #A3722E;
+  --amber-500: #C5923A;
+  --amber-400: #D4A856;
+  --amber-300: #E0BE7A;
+  --amber-200: #EBD5A4;
+  --amber-100: #F5EBCE;
+  --amber-50:  #FBF6EA;
+
+  /* ── Char (Neutral dark) ──
+     Chalkboard black, dark ceilings, crispy burger edges,
+     the space between the lights. */
+  --char-950: #070605;
+  --char-900: #110F0D;
+  --char-800: #1D1813;
+  --char-700: #2C2520;
+  --char-600: #3D342D;
+  --char-500: #52473E;
+  --char-400: #6E6250;
+  --char-300: #8C7F6E;
+  --char-200: #ADA395;
+  --char-100: #D0CAC0;
+  --char-50:  #ECEAE6;
+
+  /* ── Cream (Neutral warm) ──
+     Comfort Colors tees, kraft bags, sourdough,
+     the warm side of white. */
+  --cream-950: #2B2924;
+  --cream-900: #46433C;
+  --cream-800: #6B665D;
+  --cream-700: #918A7E;
+  --cream-600: #ADA799;
+  --cream-500: #C4BFB3;
+  --cream-400: #D3D0C5;
+  --cream-300: #E0DDD4;
+  --cream-200: #ECEAE4;
+  --cream-100: #F5F3EF;
+  --cream-50:  #FAFAF8;
+
+  /* ── Rust (Supporting warm) ──
+     Deep-fried edges, tallow rendering, that
+     dark caramelization on the flat top. */
+  --rust-950: #170B04;
+  --rust-900: #2E170A;
+  --rust-800: #4B2610;
+  --rust-700: #6B3818;
+  --rust-600: #8C4B22;
+  --rust-500: #A85E2D;
+  --rust-400: #C07640;
+  --rust-300: #D49768;
+  --rust-200: #E4BB98;
+  --rust-100: #F1DCC8;
+  --rust-50:  #F9F0E8;
+
+  /* ── Feedback ── */
+  --color-success: #4D7158;
+  --color-warning: #C5923A;
+  --color-error:   #8C4B22;
+  --color-info:    #5E8668;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   2. SEMANTIC TOKENS — Light Theme (Default)
+   Use these in components.
+   ────────────────────────────────────────────────────────── */
+
+:root {
+
+  /* ── Backgrounds ── */
+  --bg-page:        var(--cream-100);
+  --bg-surface:     var(--cream-50);
+  --bg-card:        #FFFFFF;
+  --bg-elevated:    #FFFFFF;
+  --bg-muted:       var(--cream-200);
+  --bg-inverse:     var(--char-800);
+  --bg-brand:       var(--sage-600);
+  --bg-brand-subtle:var(--sage-50);
+  --bg-accent:      var(--amber-50);
+  --bg-overlay:     rgba(7, 6, 5, 0.6);
+
+  /* ── Text ── */
+  --text-primary:   var(--char-900);
+  --text-secondary: var(--char-500);
+  --text-muted:     var(--char-300);
+  --text-inverse:   var(--cream-100);
+  --text-brand:     var(--sage-700);
+  --text-accent:    var(--amber-700);
+  --text-link:      var(--sage-600);
+  --text-link-hover:var(--sage-800);
+  --text-on-brand:  var(--cream-50);
+
+  /* ── Borders ── */
+  --border-default: var(--cream-300);
+  --border-subtle:  var(--cream-200);
+  --border-strong:  var(--cream-600);
+  --border-brand:   var(--sage-300);
+  --border-accent:  var(--amber-300);
+
+  /* ── Interactive ── */
+  --btn-primary-bg:       var(--sage-600);
+  --btn-primary-text:     var(--cream-50);
+  --btn-primary-hover:    var(--sage-700);
+  --btn-secondary-bg:     transparent;
+  --btn-secondary-text:   var(--sage-700);
+  --btn-secondary-border: var(--sage-500);
+  --btn-secondary-hover:  var(--sage-50);
+  --btn-accent-bg:        var(--amber-500);
+  --btn-accent-text:      var(--char-950);
+  --btn-accent-hover:     var(--amber-600);
+
+  /* ── Focus ── */
+  --focus-ring:        var(--sage-400);
+  --focus-ring-offset: var(--bg-page);
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   3. SEMANTIC TOKENS — Dark Theme
+   Chalkboard mode. The real Tallow House energy.
+   ────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-page:        var(--char-900);
+    --bg-surface:     var(--char-800);
+    --bg-card:        var(--char-700);
+    --bg-elevated:    var(--char-600);
+    --bg-muted:       var(--char-800);
+    --bg-inverse:     var(--cream-100);
+    --bg-brand:       var(--sage-700);
+    --bg-brand-subtle:var(--sage-950);
+    --bg-accent:      var(--amber-950);
+    --bg-overlay:     rgba(7, 6, 5, 0.8);
+
+    --text-primary:   var(--cream-200);
+    --text-secondary: var(--cream-500);
+    --text-muted:     var(--char-400);
+    --text-inverse:   var(--char-900);
+    --text-brand:     var(--sage-300);
+    --text-accent:    var(--amber-300);
+    --text-link:      var(--sage-400);
+    --text-link-hover:var(--sage-200);
+    --text-on-brand:  var(--cream-50);
+
+    --border-default: var(--char-600);
+    --border-subtle:  var(--char-700);
+    --border-strong:  var(--char-400);
+    --border-brand:   var(--sage-800);
+    --border-accent:  var(--amber-800);
+
+    --btn-primary-bg:       var(--sage-600);
+    --btn-primary-text:     var(--cream-50);
+    --btn-primary-hover:    var(--sage-500);
+    --btn-secondary-bg:     transparent;
+    --btn-secondary-text:   var(--sage-300);
+    --btn-secondary-border: var(--sage-700);
+    --btn-secondary-hover:  var(--sage-950);
+    --btn-accent-bg:        var(--amber-500);
+    --btn-accent-text:      var(--char-950);
+    --btn-accent-hover:     var(--amber-400);
+
+    --focus-ring:        var(--sage-500);
+    --focus-ring-offset: var(--bg-page);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg-page:        var(--char-900);
+  --bg-surface:     var(--char-800);
+  --bg-card:        var(--char-700);
+  --bg-elevated:    var(--char-600);
+  --bg-muted:       var(--char-800);
+  --bg-inverse:     var(--cream-100);
+  --bg-brand:       var(--sage-700);
+  --bg-brand-subtle:var(--sage-950);
+  --bg-accent:      var(--amber-950);
+  --bg-overlay:     rgba(7, 6, 5, 0.8);
+
+  --text-primary:   var(--cream-200);
+  --text-secondary: var(--cream-500);
+  --text-muted:     var(--char-400);
+  --text-inverse:   var(--char-900);
+  --text-brand:     var(--sage-300);
+  --text-accent:    var(--amber-300);
+  --text-link:      var(--sage-400);
+  --text-link-hover:var(--sage-200);
+  --text-on-brand:  var(--cream-50);
+
+  --border-default: var(--char-600);
+  --border-subtle:  var(--char-700);
+  --border-strong:  var(--char-400);
+  --border-brand:   var(--sage-800);
+  --border-accent:  var(--amber-800);
+
+  --btn-primary-bg:       var(--sage-600);
+  --btn-primary-text:     var(--cream-50);
+  --btn-primary-hover:    var(--sage-500);
+  --btn-secondary-bg:     transparent;
+  --btn-secondary-text:   var(--sage-300);
+  --btn-secondary-border: var(--sage-700);
+  --btn-secondary-hover:  var(--sage-950);
+  --btn-accent-bg:        var(--amber-500);
+  --btn-accent-text:      var(--char-950);
+  --btn-accent-hover:     var(--amber-400);
+
+  --focus-ring:        var(--sage-500);
+  --focus-ring-offset: var(--bg-page);
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   4. TYPOGRAPHY
+   Teko — condensed, industrial, poster energy.
+   Work Sans — warm, readable, not sterile.
+   ────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Families ── */
+  --font-display: 'Teko', 'Impact', 'Arial Narrow', sans-serif;
+  --font-body:    'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* ── Weights ── */
+  --weight-light:   300;
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semi:    600;
+  --weight-bold:    700;
+
+  /* ── Scale (fluid, Major Third ~1.25) ── */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-md:   1.125rem;
+  --text-lg:   1.25rem;
+  --text-xl:   1.5rem;
+  --text-2xl:  1.875rem;
+  --text-3xl:  2.25rem;
+  --text-4xl:  3rem;
+  --text-5xl:  3.75rem;
+  --text-6xl:  4.5rem;
+  --text-hero: clamp(3.5rem, 10vw, 8rem);
+
+  /* ── Line heights ── */
+  --leading-none:    1;
+  --leading-tight:   1.1;
+  --leading-snug:    1.3;
+  --leading-normal:  1.6;
+  --leading-relaxed: 1.75;
+
+  /* ── Tracking ── */
+  --tracking-tight:   -0.01em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.04em;
+  --tracking-wider:   0.08em;
+  --tracking-widest:  0.16em;
+
+  /* ── Composite styles ──
+     Teko renders tall and condensed — it needs wide tracking
+     and tight leading to feel right at display sizes. */
+
+  /* Hero */
+  --type-hero-size:      var(--text-hero);
+  --type-hero-weight:    var(--weight-medium);
+  --type-hero-leading:   var(--leading-none);
+  --type-hero-tracking:  var(--tracking-wide);
+  --type-hero-transform: uppercase;
+
+  /* H1 */
+  --type-h1-size:     clamp(2.5rem, 6vw, var(--text-5xl));
+  --type-h1-weight:   var(--weight-medium);
+  --type-h1-leading:  var(--leading-none);
+  --type-h1-tracking: var(--tracking-wide);
+
+  /* H2 */
+  --type-h2-size:     clamp(1.875rem, 4vw, var(--text-4xl));
+  --type-h2-weight:   var(--weight-medium);
+  --type-h2-leading:  var(--leading-tight);
+  --type-h2-tracking: var(--tracking-wide);
+
+  /* H3 */
+  --type-h3-size:     var(--text-2xl);
+  --type-h3-weight:   var(--weight-medium);
+  --type-h3-leading:  var(--leading-tight);
+  --type-h3-tracking: var(--tracking-wide);
+
+  /* Body */
+  --type-body-size:    var(--text-base);
+  --type-body-weight:  var(--weight-regular);
+  --type-body-leading: var(--leading-normal);
+
+  /* Body large */
+  --type-body-lg-size:    var(--text-md);
+  --type-body-lg-leading: var(--leading-relaxed);
+
+  /* Label — the chalkboard menu vibe */
+  --type-label-size:      var(--text-xs);
+  --type-label-weight:    var(--weight-medium);
+  --type-label-tracking:  var(--tracking-widest);
+  --type-label-transform: uppercase;
+
+  /* Nav */
+  --type-nav-size:     var(--text-lg);
+  --type-nav-weight:   var(--weight-regular);
+  --type-nav-tracking: var(--tracking-wider);
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   5. SPACING
+   ────────────────────────────────────────────────────────── */
+
+:root {
+  --space-1:   0.25rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-5:   1.25rem;
+  --space-6:   1.5rem;
+  --space-8:   2rem;
+  --space-10:  2.5rem;
+  --space-12:  3rem;
+  --space-16:  4rem;
+  --space-20:  5rem;
+  --space-24:  6rem;
+  --space-32:  8rem;
+
+  /* ── Section rhythm ── */
+  --section-y:        clamp(4rem, 8vw, 7rem);
+  --section-x:        clamp(1.25rem, 4vw, 2rem);
+  --container-max:    1280px;
+  --container-narrow: 720px;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   6. BORDERS & RADII
+   Mostly sharp. This isn't a soft brand.
+   ────────────────────────────────────────────────────────── */
+
+:root {
+  --radius-none: 0;
+  --radius-sm:   2px;
+  --radius-md:   4px;
+  --radius-lg:   8px;
+  --radius-xl:   12px;
+  --radius-full: 9999px;
+
+  --border-thin:   1px;
+  --border-medium: 2px;
+  --border-thick:  3px;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   7. SHADOWS
+   Low and warm. Not corporate drop shadows.
+   ────────────────────────────────────────────────────────── */
+
+:root {
+  --shadow-xs:    0 1px 2px rgba(17, 15, 13, 0.06);
+  --shadow-sm:    0 1px 3px rgba(17, 15, 13, 0.10),
+                  0 1px 2px rgba(17, 15, 13, 0.05);
+  --shadow-md:    0 4px 6px rgba(17, 15, 13, 0.08),
+                  0 2px 4px rgba(17, 15, 13, 0.04);
+  --shadow-lg:    0 10px 15px rgba(17, 15, 13, 0.10),
+                  0 4px 6px rgba(17, 15, 13, 0.05);
+  --shadow-xl:    0 20px 25px rgba(17, 15, 13, 0.12),
+                  0 8px 10px rgba(17, 15, 13, 0.05);
+  --shadow-inner: inset 0 2px 4px rgba(17, 15, 13, 0.08);
+
+  /* Brand glows — for CTAs or hero elements */
+  --shadow-glow-sage:  0 4px 14px rgba(77, 113, 88, 0.3);
+  --shadow-glow-amber: 0 4px 14px rgba(197, 146, 58, 0.3);
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   8. MOTION
+   ────────────────────────────────────────────────────────── */
+
+:root {
+  --duration-fast:   100ms;
+  --duration-normal: 200ms;
+  --duration-slow:   350ms;
+  --duration-slower: 500ms;
+
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in:      cubic-bezier(0.4, 0, 1, 1);
+  --ease-out:     cubic-bezier(0, 0, 0.2, 1);
+  --ease-bounce:  cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --transition-colors:    color var(--duration-normal) var(--ease-default),
+                          background-color var(--duration-normal) var(--ease-default),
+                          border-color var(--duration-normal) var(--ease-default);
+  --transition-transform: transform var(--duration-normal) var(--ease-out);
+  --transition-shadow:    box-shadow var(--duration-normal) var(--ease-default);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast:   0ms;
+    --duration-normal: 0ms;
+    --duration-slow:   0ms;
+    --duration-slower: 0ms;
+  }
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   9. Z-INDEX
+   ────────────────────────────────────────────────────────── */
+
+:root {
+  --z-base:     0;
+  --z-above:    10;
+  --z-dropdown: 20;
+  --z-sticky:   30;
+  --z-nav:      40;
+  --z-modal:    50;
+  --z-toast:    60;
+  --z-tooltip:  70;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   10. LAYOUT
+   ────────────────────────────────────────────────────────── */
+
+:root {
+  --nav-height: 64px;
+  --gutter:     clamp(1rem, 3vw, 1.5rem);
+  --gutter-lg:  clamp(1.5rem, 4vw, 3rem);
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   11. TEXTURE / GRAIN
+   The photography has a deliberate film-grain quality.
+   Use this as a subtle overlay on hero sections or
+   full-bleed images to tie the digital and physical
+   brand together.
+   ────────────────────────────────────────────────────────── */
+
+:root {
+  /* Apply via pseudo-element with mix-blend-mode: overlay */
+  --grain-opacity: 0.08;
+  --grain-size: 200px;
+}
