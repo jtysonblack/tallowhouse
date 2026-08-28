@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const reviewerVideos = [
+  { name: 'Reviewer name', outlet: 'Video coming soon' },
+  { name: 'Reviewer name', outlet: 'Video coming soon' },
+  { name: 'Reviewer name', outlet: 'Video coming soon' },
+];
+
+const reviews = [
+  { source: 'Google', quote: 'Review quote goes here.', author: 'Reviewer name' },
+  { source: 'Facebook', quote: 'Review quote goes here.', author: 'Reviewer name' },
+  { source: 'Google', quote: 'Review quote goes here.', author: 'Reviewer name' },
+  { source: 'Facebook', quote: 'Review quote goes here.', author: 'Reviewer name' },
+];
+
+const press = [
+  { outlet: 'Outlet name', headline: 'Article headline goes here.' },
+  { outlet: 'Outlet name', headline: 'Article headline goes here.' },
+];
+---
+
+<Layout
+  title="Word On The Street"
+  description="What people are saying about Tallow House — local reviewer videos, Google and Facebook reviews, and press mentions."
+>
+  <section class="section wots-hero section-dark">
+    <div class="container">
+      <h1 class="h1">Word On The Street</h1>
+      <p class="body-lg wots-hero-desc">
+        We don't have to tell you it's the best burger in town — plenty of people already have.
+        Here's what local reviewers, regulars, and the press are saying.
+      </p>
+    </div>
+  </section>
+
+  <section class="section wots-videos-section">
+    <div class="container">
+      <h2 class="h2">On Camera</h2>
+      <div class="wots-video-grid">
+        {reviewerVideos.map((v) => (
+          <div class="wots-video-card">
+            <div class="wots-video-slot">
+              <span class="wots-play-icon" aria-hidden="true">▶</span>
+            </div>
+            <h3 class="h3">{v.name}</h3>
+            <p>{v.outlet}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark wots-reviews-section">
+    <div class="container">
+      <h2 class="h2">From The Reviews</h2>
+      <div class="wots-review-grid">
+        {reviews.map((r) => (
+          <div class="wots-review-card">
+            <span class="wots-review-source">{r.source}</span>
+            <p class="wots-review-quote">"{r.quote}"</p>
+            <p class="wots-review-author">— {r.author}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section wots-press-section">
+    <div class="container">
+      <h2 class="h2">In The Press</h2>
+      <div class="wots-press-grid">
+        {press.map((p) => (
+          <div class="wots-press-card">
+            <span class="wots-press-outlet">{p.outlet}</span>
+            <p class="wots-press-headline">{p.headline}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .wots-hero-desc { max-width: 60ch; margin-top: var(--space-4); color: var(--cream-400); }
+
+  .wots-video-grid,
+  .wots-press-grid {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-10);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  .wots-video-slot {
+    aspect-ratio: 16/9;
+    border-radius: var(--radius-lg);
+    border: 2px dashed var(--border-strong);
+    background: var(--bg-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+  }
+  .wots-play-icon {
+    font-size: var(--text-3xl);
+    color: var(--text-muted);
+  }
+  .wots-video-card h3 { margin-top: var(--space-1); }
+  .wots-video-card p { color: var(--text-secondary); margin-top: var(--space-1); font-size: var(--text-sm); }
+
+  .wots-review-grid {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-10);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  .wots-review-card {
+    border: var(--border-thin) dashed var(--char-600);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+  .wots-review-source {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+    color: var(--sage-300);
+  }
+  .wots-review-quote { margin-top: var(--space-3); color: var(--cream-200); }
+  .wots-review-author { margin-top: var(--space-3); color: var(--cream-500); font-size: var(--text-sm); }
+
+  .wots-press-card {
+    border: 2px dashed var(--border-strong);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+  }
+  .wots-press-outlet {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+    color: var(--text-brand);
+  }
+  .wots-press-headline { margin-top: var(--space-3); color: var(--text-secondary); }
+</style>

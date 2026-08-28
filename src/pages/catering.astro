@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Catering"
+  description="Tallow House catering — smash burgers, hand-cut tallow fries, and the same grassfed, sourdough, no-seed-oil menu, dropped off or served at your next event."
+>
+  <section class="section catering-hero section-dark">
+    <div class="container">
+      <h1 class="h1">Catering</h1>
+      <p class="body-lg catering-hero-desc">
+        Same menu, same grassfed beef and sourdough baked daily — brought to your office,
+        wedding, or backyard. Drop-off trays or a full crew on-site, we'll build a package
+        that fits the headcount.
+      </p>
+    </div>
+  </section>
+
+  <section class="section catering-form-section">
+    <div class="container">
+      <h2 class="h2">Get A Quote.</h2>
+      <p class="body-lg catering-form-desc">
+        Tell us the headcount and the date — we'll follow up with options and pricing.
+      </p>
+
+      <form
+        name="catering-inquiry"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        action="/thank-you"
+        class="mac-form"
+      >
+        <input type="hidden" name="form-name" value="catering-inquiry" />
+        <p class="hidden-field">
+          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        </p>
+
+        <label for="cat-name" class="visually-hidden">Full Name</label>
+        <input class="mac-field-third" type="text" id="cat-name" name="name" placeholder="Full Name" required />
+
+        <label for="cat-phone" class="visually-hidden">Phone</label>
+        <input class="mac-field-third" type="tel" id="cat-phone" name="phone" placeholder="Phone" required />
+
+        <label for="cat-email" class="visually-hidden">Email</label>
+        <input class="mac-field-third" type="email" id="cat-email" name="email" placeholder="Email" required />
+
+        <label for="cat-count" class="visually-hidden">Guest Count</label>
+        <input class="mac-field-third" type="text" id="cat-count" name="guest_count" placeholder="Guest Count" required />
+
+        <label for="cat-date" class="visually-hidden">Event Date</label>
+        <input class="mac-field-third" type="date" id="cat-date" name="event_date" placeholder="Event Date" />
+
+        <label for="cat-format" class="visually-hidden">Service Format</label>
+        <select class="mac-field-third" id="cat-format" name="service_format" required>
+          <option value="">Service Format</option>
+          <option>Drop-Off Trays</option>
+          <option>On-Site Crew</option>
+          <option>Not Sure Yet</option>
+        </select>
+
+        <label for="cat-details" class="visually-hidden">Details</label>
+        <textarea id="cat-details" name="details" rows="5" placeholder="Location, timing, dietary needs, budget — whatever you've got." required></textarea>
+
+        <button type="submit" class="mac-submit">
+          Get A Quote
+          <svg class="mac-submit-arrow" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M42 2 L78 30 L42 58" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M0 30 H74" stroke="currentColor" stroke-width="9" stroke-linecap="round" />
+          </svg>
+        </button>
+      </form>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .catering-hero-desc { max-width: 60ch; margin-top: var(--space-4); color: var(--cream-400); }
+  .catering-form-desc { max-width: 60ch; margin-top: var(--space-3); color: var(--text-secondary); }
+</style>

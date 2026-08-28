@@ -131,84 +131,6 @@ const pastEvents = [
 
   .events-form-desc { max-width: 60ch; margin-top: var(--space-3); color: var(--cream-400); }
 
-  .mac-form {
-    margin-top: var(--space-10);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(14px, 2.5vw, 28px);
-  }
-  .hidden-field { position: absolute; left: -9999px; }
-
-  .mac-form input,
-  .mac-form select {
-    grid-column: span 3;
-    width: 100%;
-    border: none;
-    background: var(--cream-50);
-    color: var(--char-900);
-    padding: clamp(16px, 2vw, 22px) clamp(20px, 3vw, 32px);
-    border-radius: var(--radius-full);
-    font-family: var(--font-body);
-    font-size: var(--text-md);
-    font-weight: var(--weight-medium);
-    appearance: none;
-  }
-  .mac-form select { color: var(--char-600); }
-  .mac-form select:valid { color: var(--char-900); }
-  .mac-form input::placeholder { color: var(--char-400); }
-  .mac-form input:focus,
-  .mac-form select:focus,
-  .mac-form textarea:focus { outline: 2px solid var(--sage-400); outline-offset: 2px; }
-
-  .mac-form textarea {
-    grid-column: 1 / -1;
-    width: 100%;
-    min-height: 180px;
-    resize: vertical;
-    border: none;
-    background: var(--cream-50);
-    color: var(--char-900);
-    padding: clamp(16px, 2vw, 22px) clamp(20px, 3vw, 32px);
-    border-radius: var(--radius-xl);
-    font-family: var(--font-body);
-    font-size: var(--text-md);
-    font-weight: var(--weight-medium);
-  }
-  .mac-form textarea::placeholder { color: var(--char-400); }
-
-  .mac-submit {
-    grid-column: 1 / -1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(10px, 2vw, 24px);
-    width: 100%;
-    margin-top: var(--space-2);
-    padding: clamp(20px, 4vw, 40px) clamp(16px, 3vw, 32px);
-    border: none;
-    border-radius: var(--radius-full);
-    background: var(--sage-500);
-    color: var(--char-950);
-    cursor: pointer;
-    font-family: 'Archivo', var(--font-display), sans-serif;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    font-size: clamp(2rem, 6vw, 4.5rem);
-    line-height: 1;
-    transition: var(--transition-colors);
-  }
-  .mac-submit:hover { background: var(--sage-400); }
-  .mac-submit-arrow {
-    width: clamp(28px, 5vw, 56px);
-    height: auto;
-    flex-shrink: 0;
-  }
-
-  @media (min-width: 700px) {
-    .mac-form .mac-field-third { grid-column: span 1; }
-  }
-
   .past-events-grid {
     display: grid;
     gap: var(--space-6);
@@ -223,8 +145,4 @@ const pastEvents = [
     margin-bottom: var(--space-4);
   }
   .past-event-card p { color: var(--cream-400); margin-top: var(--space-2); font-size: var(--text-sm); }
-
-  @media (min-width: 700px) {
-    .form-row-split { grid-template-columns: 1fr 1fr; }
-  }
 </style>
