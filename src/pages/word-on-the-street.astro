@@ -4,19 +4,26 @@ import Layout from '../layouts/Layout.astro';
 const newsVideos = [
   { type: 'youtube', id: 'iqoFUIJD61E', caption: 'Tallow House is making its mark as locals line up for burgers' },
   { type: 'youtube', id: 'T_YfmjQ59ME', caption: '3 In Your Town: Tallow House burgers go viral in Cleveland, TN' },
-  { type: 'instagram', url: 'https://www.instagram.com/reel/DZ5OhDllBnH/', caption: '@local3news — "The Viral Burger"' },
+  { type: 'instagram', url: 'https://www.instagram.com/reel/DZ5OhDllBnH/', thumb: '/images/wots-ig-local3news.webp', caption: '@local3news — "The Viral Burger"' },
 ];
 
 const influencerVideos = [
-  { type: 'instagram', url: 'https://www.instagram.com/reel/DYiVA0eyEcv/', caption: '@webbchatts' },
-  { type: 'instagram', url: 'https://www.instagram.com/reel/DY0SiB6PnR7/', caption: '@dadbod.cooking' },
+  { type: 'instagram', url: 'https://www.instagram.com/reel/DYiVA0eyEcv/', thumb: '/images/wots-ig-webbchatts.webp', caption: '@webbchatts' },
+  { type: 'instagram', url: 'https://www.instagram.com/reel/DY0SiB6PnR7/', thumb: '/images/wots-ig-dadbodcooking.webp', caption: '@dadbod.cooking' },
+];
+
+const ratings = [
+  { source: 'Google', rating: '4.8', count: '241 reviews' },
+  { source: 'Facebook', rating: '4.6', count: '33 reviews' },
 ];
 
 const reviews = [
-  { source: 'Google', quote: 'Review quote goes here.', author: 'Reviewer name' },
-  { source: 'Facebook', quote: 'Review quote goes here.', author: 'Reviewer name' },
-  { source: 'Google', quote: 'Review quote goes here.', author: 'Reviewer name' },
-  { source: 'Facebook', quote: 'Review quote goes here.', author: 'Reviewer name' },
+  { source: 'Google', quote: "And you can't go wrong with tallow cooked fries, and homemade spicy ketchup.", author: 'Google review' },
+  { source: 'Google', quote: 'Great bun, fresh beef, the secret sauce is what makes it.', author: 'Google review' },
+  { source: 'Google', quote: 'They genuinely care about their service and quality of food.', author: 'Google review' },
+  { source: 'Facebook', quote: 'Best burger I have had in a long time! The plus was cooked in Beef Tallow!', author: 'Michelle Harrison McAfee' },
+  { source: 'Facebook', quote: 'TALLOW HOUSE is the truth!!! That\'s my review.', author: 'Extraordinaire' },
+  { source: 'Google', quote: 'Meat and cheese and a little bit of grilled onions.', author: 'Google review' },
 ];
 ---
 
@@ -40,8 +47,8 @@ const reviews = [
       <div class="wots-video-grid">
         {newsVideos.map((v) => (
           <div class="wots-video-card">
-            <div class="wots-video-slot">
-              {v.type === 'youtube' ? (
+            {v.type === 'youtube' ? (
+              <div class="wots-video-slot wots-video-slot--wide">
                 <iframe
                   src={`https://www.youtube.com/embed/${v.id}`}
                   title={v.caption}
@@ -49,16 +56,13 @@ const reviews = [
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
                 ></iframe>
-              ) : (
-                <blockquote
-                  class="instagram-media"
-                  data-instgrm-permalink={v.url}
-                  data-instgrm-version="14"
-                >
-                  <a href={v.url} target="_blank" rel="noopener noreferrer">View on Instagram</a>
-                </blockquote>
-              )}
-            </div>
+              </div>
+            ) : (
+              <a href={v.url} target="_blank" rel="noopener noreferrer" class="wots-ig-card">
+                <img src={v.thumb} alt={v.caption} loading="lazy" />
+                <span class="wots-ig-badge">Instagram</span>
+              </a>
+            )}
             <p>{v.caption}</p>
           </div>
         ))}
@@ -69,18 +73,13 @@ const reviews = [
   <section class="section section-dark wots-videos-section">
     <div class="container">
       <h2 class="h2">Reviewer Videos</h2>
-      <div class="wots-video-grid">
+      <div class="wots-video-grid wots-video-grid--reviewers">
         {influencerVideos.map((v) => (
           <div class="wots-video-card">
-            <div class="wots-video-slot">
-              <blockquote
-                class="instagram-media"
-                data-instgrm-permalink={v.url}
-                data-instgrm-version="14"
-              >
-                <a href={v.url} target="_blank" rel="noopener noreferrer">View on Instagram</a>
-              </blockquote>
-            </div>
+            <a href={v.url} target="_blank" rel="noopener noreferrer" class="wots-ig-card">
+              <img src={v.thumb} alt={v.caption} loading="lazy" />
+              <span class="wots-ig-badge">Instagram</span>
+            </a>
             <p>{v.caption}</p>
           </div>
         ))}
@@ -91,6 +90,15 @@ const reviews = [
   <section class="section wots-reviews-section">
     <div class="container">
       <h2 class="h2">From The Reviews</h2>
+      <div class="wots-rating-row">
+        {ratings.map((r) => (
+          <div class="wots-rating-badge">
+            <span class="wots-rating-source">{r.source}</span>
+            <span class="wots-rating-score">{r.rating} <span class="wots-rating-star">★</span></span>
+            <span class="wots-rating-count">{r.count}</span>
+          </div>
+        ))}
+      </div>
       <div class="wots-review-grid">
         {reviews.map((r) => (
           <div class="wots-review-card">
@@ -104,16 +112,6 @@ const reviews = [
   </section>
 </Layout>
 
-<script is:inline src="https://www.instagram.com/embed.js" async></script>
-
-<script>
-  function processEmbeds() {
-    // @ts-ignore — third-party global from the Instagram embed.js script
-    window.instgrm?.Embeds?.process();
-  }
-  document.addEventListener('astro:page-load', processEmbeds);
-</script>
-
 <style>
   .wots-hero-desc { max-width: 60ch; margin-top: var(--space-4); color: var(--cream-400); }
 
@@ -123,30 +121,87 @@ const reviews = [
     margin-top: var(--space-10);
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
+  .wots-video-grid--reviewers {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 300px));
+  }
   .wots-video-slot {
-    aspect-ratio: 9/16;
-    max-height: 640px;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    background: var(--bg-surface);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: var(--char-950);
     margin-bottom: var(--space-4);
   }
-  .wots-press-section .wots-video-slot { aspect-ratio: 16/9; max-height: none; }
+  .wots-video-slot--wide {
+    aspect-ratio: 16/9;
+  }
   .wots-video-slot iframe {
     width: 100%;
     height: 100%;
     border: 0;
+    display: block;
   }
-  .wots-video-slot :global(.instagram-media) {
-    width: 100% !important;
-    min-width: 0 !important;
-    margin: 0 !important;
+
+  .wots-ig-card {
+    position: relative;
+    display: block;
+    aspect-ratio: 9/16;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--space-4);
+    background: var(--char-950);
+    transition: var(--transition-transform);
   }
+  .wots-ig-card:hover { transform: scale(1.015); }
+  .wots-ig-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .wots-ig-badge {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    background: rgba(7, 6, 5, 0.65);
+    backdrop-filter: blur(4px);
+    color: var(--cream-50);
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+    padding: 4px var(--space-3);
+    border-radius: var(--radius-full);
+  }
+
   .wots-video-card p { color: var(--text-secondary); margin-top: var(--space-1); font-size: var(--text-sm); }
   .wots-videos-section .wots-video-card p { color: var(--cream-400); }
+
+  .wots-rating-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+  }
+  .wots-rating-badge {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--space-4) var(--space-6);
+    border: var(--border-thin) solid var(--border-default);
+    border-radius: var(--radius-lg);
+  }
+  .wots-rating-source {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+  .wots-rating-score {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    color: var(--text-primary);
+  }
+  .wots-rating-star { color: var(--amber-500); }
+  .wots-rating-count { font-size: var(--text-sm); color: var(--text-muted); }
 
   .wots-review-grid {
     display: grid;
@@ -155,7 +210,8 @@ const reviews = [
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
   .wots-review-card {
-    border: var(--border-thin) dashed var(--border-strong);
+    border: var(--border-thin) solid var(--border-default);
+    background: var(--bg-surface);
     border-radius: var(--radius-lg);
     padding: var(--space-6);
   }
@@ -166,6 +222,6 @@ const reviews = [
     font-size: var(--text-sm);
     color: var(--text-brand);
   }
-  .wots-review-quote { margin-top: var(--space-3); color: var(--text-secondary); }
+  .wots-review-quote { margin-top: var(--space-3); color: var(--text-primary); }
   .wots-review-author { margin-top: var(--space-3); color: var(--text-muted); font-size: var(--text-sm); }
 </style>
