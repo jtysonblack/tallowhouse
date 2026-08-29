@@ -110,7 +110,14 @@ const pastEvents = [
   </section>
 
   <section class="section section-dark past-events-section">
-    <div class="container">
+    <div class="past-events-video-bg">
+      <video autoplay muted loop playsinline>
+        <source src="/video/events-busy.webm" type="video/webm" />
+        <source src="/video/events-busy.mp4" type="video/mp4" />
+      </video>
+      <div class="past-events-scrim"></div>
+    </div>
+    <div class="container past-events-content">
       <h2 class="h2">We've Been Busy.</h2>
       <div class="past-events-grid">
         {pastEvents.map((ev) => (
@@ -130,6 +137,30 @@ const pastEvents = [
   .events-hero-desc { max-width: 60ch; margin-top: var(--space-4); margin-left: auto; color: var(--cream-400); }
 
   .events-form-desc { max-width: 60ch; margin-top: var(--space-3); color: var(--cream-400); }
+
+  .past-events-section {
+    position: relative;
+    overflow: hidden;
+  }
+  .past-events-video-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .past-events-video-bg video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .past-events-scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 4, 3, 0.72);
+  }
+  .past-events-content {
+    position: relative;
+    z-index: 1;
+  }
 
   .past-events-grid {
     display: grid;
