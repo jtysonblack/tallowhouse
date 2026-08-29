@@ -11,7 +11,7 @@ const community = [
 const behindTheBurger = [
   { image: '/images/culture-founder.webp', name: 'The Founder', detail: 'Meet Nathan Zakkas, owner and founder. Public-facing, hands-on, and still works the grill.' },
   { image: '/images/culture-crew.webp', name: 'The Crew', detail: 'Green aprons, black bandanas, high-volume nights. The family that makes it happen.' },
-  { image: '/images/culture-collabs.webp', name: 'The Collabs', detail: 'Bless Yer Heart, Hoptown Beer Bar  — real partnerships, full brand takeovers.' },
+  { image: '/images/culture-collabs.webp', name: 'The Collabs', detail: 'Bless Yer Heart, Hoptown Beer Bar  — real partnerships, full brand takeovers.', fit: 'contain' },
 ];
 ---
 
@@ -49,7 +49,7 @@ const behindTheBurger = [
       <div class="meet-grid">
         {behindTheBurger.map((item) => (
           <div class="meet-card">
-            <div class="meet-card-imgwrap">
+            <div class:list={['meet-card-imgwrap', item.fit === 'contain' && 'meet-card-imgwrap--contain']}>
               <img src={item.image} alt={item.name} loading="lazy" class="parallax-img" />
             </div>
             <h3 class="h3 reveal-up">{item.name}</h3>
@@ -171,6 +171,12 @@ const behindTheBurger = [
     height: 116%;
     object-fit: cover;
     will-change: transform;
+  }
+  .meet-card-imgwrap--contain {
+    background: var(--char-900);
+  }
+  .meet-card-imgwrap--contain .parallax-img {
+    object-fit: contain;
   }
   .meet-card .reveal-up {
     transform: translateY(24px);

@@ -1,10 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const reviewerVideos = [
-  { name: 'Reviewer name', outlet: 'Video coming soon' },
-  { name: 'Reviewer name', outlet: 'Video coming soon' },
-  { name: 'Reviewer name', outlet: 'Video coming soon' },
+const newsVideos = [
+  { type: 'youtube', id: 'iqoFUIJD61E', caption: 'Tallow House is making its mark as locals line up for burgers' },
+  { type: 'youtube', id: 'T_YfmjQ59ME', caption: '3 In Your Town: Tallow House burgers go viral in Cleveland, TN' },
+  { type: 'instagram', url: 'https://www.instagram.com/reel/DZ5OhDllBnH/', caption: '@local3news — "The Viral Burger"' },
+];
+
+const influencerVideos = [
+  { type: 'instagram', url: 'https://www.instagram.com/reel/DYiVA0eyEcv/', caption: '@webbchatts' },
+  { type: 'instagram', url: 'https://www.instagram.com/reel/DY0SiB6PnR7/', caption: '@dadbod.cooking' },
 ];
 
 const reviews = [
@@ -13,45 +18,77 @@ const reviews = [
   { source: 'Google', quote: 'Review quote goes here.', author: 'Reviewer name' },
   { source: 'Facebook', quote: 'Review quote goes here.', author: 'Reviewer name' },
 ];
-
-const press = [
-  { outlet: 'Outlet name', headline: 'Article headline goes here.' },
-  { outlet: 'Outlet name', headline: 'Article headline goes here.' },
-];
 ---
 
 <Layout
   title="Word On The Street"
-  description="What people are saying about Tallow House — local reviewer videos, Google and Facebook reviews, and press mentions."
+  description="What people are saying about Tallow House — local news coverage, influencer reviews, and Google and Facebook reviews."
 >
   <section class="section wots-hero section-dark">
     <div class="container">
       <h1 class="h1">Word On The Street</h1>
       <p class="body-lg wots-hero-desc">
         We don't have to tell you it's the best burger in town — plenty of people already have.
-        Here's what local reviewers, regulars, and the press are saying.
+        Here's what local news, reviewers, and regulars are saying.
       </p>
     </div>
   </section>
 
-  <section class="section wots-videos-section">
+  <section class="section wots-press-section">
     <div class="container">
-      <h2 class="h2">On Camera</h2>
+      <h2 class="h2">In The News</h2>
       <div class="wots-video-grid">
-        {reviewerVideos.map((v) => (
+        {newsVideos.map((v) => (
           <div class="wots-video-card">
             <div class="wots-video-slot">
-              <span class="wots-play-icon" aria-hidden="true">▶</span>
+              {v.type === 'youtube' ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${v.id}`}
+                  title={v.caption}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              ) : (
+                <blockquote
+                  class="instagram-media"
+                  data-instgrm-permalink={v.url}
+                  data-instgrm-version="14"
+                >
+                  <a href={v.url} target="_blank" rel="noopener noreferrer">View on Instagram</a>
+                </blockquote>
+              )}
             </div>
-            <h3 class="h3">{v.name}</h3>
-            <p>{v.outlet}</p>
+            <p>{v.caption}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section section-dark wots-reviews-section">
+  <section class="section section-dark wots-videos-section">
+    <div class="container">
+      <h2 class="h2">Reviewer Videos</h2>
+      <div class="wots-video-grid">
+        {influencerVideos.map((v) => (
+          <div class="wots-video-card">
+            <div class="wots-video-slot">
+              <blockquote
+                class="instagram-media"
+                data-instgrm-permalink={v.url}
+                data-instgrm-version="14"
+              >
+                <a href={v.url} target="_blank" rel="noopener noreferrer">View on Instagram</a>
+              </blockquote>
+            </div>
+            <p>{v.caption}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section wots-reviews-section">
     <div class="container">
       <h2 class="h2">From The Reviews</h2>
       <div class="wots-review-grid">
@@ -65,48 +102,51 @@ const press = [
       </div>
     </div>
   </section>
-
-  <section class="section wots-press-section">
-    <div class="container">
-      <h2 class="h2">In The Press</h2>
-      <div class="wots-press-grid">
-        {press.map((p) => (
-          <div class="wots-press-card">
-            <span class="wots-press-outlet">{p.outlet}</span>
-            <p class="wots-press-headline">{p.headline}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
 </Layout>
+
+<script is:inline src="https://www.instagram.com/embed.js" async></script>
+
+<script>
+  function processEmbeds() {
+    // @ts-ignore — third-party global from the Instagram embed.js script
+    window.instgrm?.Embeds?.process();
+  }
+  document.addEventListener('astro:page-load', processEmbeds);
+</script>
 
 <style>
   .wots-hero-desc { max-width: 60ch; margin-top: var(--space-4); color: var(--cream-400); }
 
-  .wots-video-grid,
-  .wots-press-grid {
+  .wots-video-grid {
     display: grid;
     gap: var(--space-6);
     margin-top: var(--space-10);
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
   .wots-video-slot {
-    aspect-ratio: 16/9;
+    aspect-ratio: 9/16;
+    max-height: 640px;
     border-radius: var(--radius-lg);
-    border: 2px dashed var(--border-strong);
+    overflow: hidden;
     background: var(--bg-surface);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: var(--space-4);
   }
-  .wots-play-icon {
-    font-size: var(--text-3xl);
-    color: var(--text-muted);
+  .wots-press-section .wots-video-slot { aspect-ratio: 16/9; max-height: none; }
+  .wots-video-slot iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
   }
-  .wots-video-card h3 { margin-top: var(--space-1); }
+  .wots-video-slot :global(.instagram-media) {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
   .wots-video-card p { color: var(--text-secondary); margin-top: var(--space-1); font-size: var(--text-sm); }
+  .wots-videos-section .wots-video-card p { color: var(--cream-400); }
 
   .wots-review-grid {
     display: grid;
@@ -115,7 +155,7 @@ const press = [
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
   .wots-review-card {
-    border: var(--border-thin) dashed var(--char-600);
+    border: var(--border-thin) dashed var(--border-strong);
     border-radius: var(--radius-lg);
     padding: var(--space-6);
   }
@@ -124,22 +164,8 @@ const press = [
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     font-size: var(--text-sm);
-    color: var(--sage-300);
-  }
-  .wots-review-quote { margin-top: var(--space-3); color: var(--cream-200); }
-  .wots-review-author { margin-top: var(--space-3); color: var(--cream-500); font-size: var(--text-sm); }
-
-  .wots-press-card {
-    border: 2px dashed var(--border-strong);
-    border-radius: var(--radius-lg);
-    padding: var(--space-6);
-  }
-  .wots-press-outlet {
-    font-family: var(--font-display);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    font-size: var(--text-sm);
     color: var(--text-brand);
   }
-  .wots-press-headline { margin-top: var(--space-3); color: var(--text-secondary); }
+  .wots-review-quote { margin-top: var(--space-3); color: var(--text-secondary); }
+  .wots-review-author { margin-top: var(--space-3); color: var(--text-muted); font-size: var(--text-sm); }
 </style>

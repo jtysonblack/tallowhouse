@@ -19,68 +19,63 @@ import hours from '../data/hours.json';
           <li>Very competitive pay</li>
           <li>Full time position</li>
         </ul>
+
+        <form
+          name="job-application"
+          method="POST"
+          enctype="multipart/form-data"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          action="/thank-you"
+          class="mac-form app-form"
+        >
+          <input type="hidden" name="form-name" value="job-application" />
+          <p class="hidden-field">
+            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+          </p>
+
+          <label for="name" class="visually-hidden">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Full Name" required />
+
+          <label for="phone" class="visually-hidden">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="Phone" required />
+
+          <label for="email" class="visually-hidden">Email</label>
+          <input type="email" id="email" name="email" placeholder="Email" required />
+
+          <label for="position" class="visually-hidden">Position Interest</label>
+          <select id="position" name="position" required>
+            <option value="">Position Interest</option>
+            <option>Grill Cook</option>
+            <option>Front Counter / Team</option>
+            <option>Other</option>
+          </select>
+
+          <label for="availability" class="visually-hidden">Availability</label>
+          <input type="text" id="availability" name="availability" placeholder="Availability — e.g. evenings, weekends, full-time" required />
+
+          <label for="resume" class="app-form-file-label">
+            Attach Resume <span class="app-form-file-hint">(PDF or Word doc)</span>
+          </label>
+          <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" />
+
+          <label for="message" class="visually-hidden">Anything else we should know?</label>
+          <textarea id="message" name="message" rows="4" placeholder="Anything else we should know?"></textarea>
+
+          <button type="submit" class="mac-submit">
+            Submit Application
+            <svg class="mac-submit-arrow" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M42 2 L78 30 L42 58" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M0 30 H74" stroke="currentColor" stroke-width="9" stroke-linecap="round" />
+            </svg>
+          </button>
+        </form>
       </div>
       <div class="join-photo-strip">
         <img src="/images/careers-team-plating.jpg" alt="Team plating burgers behind the counter" loading="lazy" />
         <img src="/images/careers-grill-action.jpg" alt="Raw smash patties on the flat top with fryer baskets" loading="lazy" />
         <img src="/images/careers-cook-portrait.jpg" alt="Cook in a Tallow House cap at the flat top grill" loading="lazy" />
       </div>
-    </div>
-  </section>
-
-  <section class="section application-section">
-    <div class="container-narrow">
-      <form
-        name="job-application"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        action="/thank-you"
-        class="app-form"
-      >
-        <input type="hidden" name="form-name" value="job-application" />
-        <p class="hidden-field">
-          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-        </p>
-
-        <div class="form-row">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" required />
-        </div>
-
-        <div class="form-row form-row-split">
-          <div>
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" required />
-          </div>
-          <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <label for="position">Position Interest</label>
-          <select id="position" name="position" required>
-            <option value="">Select one</option>
-            <option>Grill Cook</option>
-            <option>Front Counter / Team</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        <div class="form-row">
-          <label for="availability">Availability</label>
-          <input type="text" id="availability" name="availability" placeholder="e.g. Evenings, weekends, full-time" required />
-        </div>
-
-        <div class="form-row">
-          <label for="message">Anything else we should know?</label>
-          <textarea id="message" name="message" rows="4"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit Application</button>
-      </form>
     </div>
   </section>
 
@@ -176,7 +171,7 @@ import hours from '../data/hours.json';
 </Layout>
 
 <style>
-  .join-hero-grid { display: grid; gap: var(--space-10); align-items: center; }
+  .join-hero-grid { display: grid; gap: var(--space-10); align-items: start; }
   .join-hero-script { font-size: var(--text-2xl); color: var(--sage-300); margin-bottom: var(--space-2); }
   .join-headline {
     font-family: var(--font-display);
@@ -225,10 +220,42 @@ import hours from '../data/hours.json';
     object-fit: cover;
   }
 
-  .app-form { display: flex; flex-direction: column; gap: var(--space-5); }
+  .app-form { margin-top: var(--space-8); }
+  .app-form-file-label {
+    grid-column: 1 / -1;
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+    color: var(--cream-300);
+  }
+  .app-form-file-hint {
+    text-transform: none;
+    letter-spacing: normal;
+    font-family: var(--font-body);
+    color: var(--cream-600);
+  }
+  .app-form input[type="file"] {
+    grid-column: 1 / -1;
+    font-size: var(--text-sm) !important;
+  }
+  .app-form input[type="file"]::file-selector-button {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+    border: none;
+    background: var(--sage-600);
+    color: var(--cream-50);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    margin-right: var(--space-3);
+    cursor: pointer;
+  }
+  .app-form input[type="file"]::file-selector-button:hover { background: var(--sage-500); }
+
   .hidden-field { position: absolute; left: -9999px; }
   .form-row { display: flex; flex-direction: column; gap: var(--space-2); }
-  .form-row-split { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
   .form-row label {
     font-family: var(--font-display);
     letter-spacing: var(--tracking-wide);
@@ -249,7 +276,7 @@ import hours from '../data/hours.json';
   .form-row input:focus,
   .form-row select:focus,
   .form-row textarea:focus { border-color: var(--focus-ring); }
-  .app-form .btn, .contact-form .btn { align-self: flex-start; margin-top: var(--space-2); }
+  .contact-form .btn { align-self: flex-start; margin-top: var(--space-2); }
 
   .section-divider {
     border: none;
@@ -286,7 +313,6 @@ import hours from '../data/hours.json';
 
   @media (min-width: 800px) {
     .join-hero-grid { grid-template-columns: 1.2fr 1fr; }
-    .form-row-split { grid-template-columns: 1fr 1fr; }
   }
   @media (min-width: 900px) {
     .contact-grid { grid-template-columns: 1fr 1fr; }
