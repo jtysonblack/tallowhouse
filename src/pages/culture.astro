@@ -9,9 +9,9 @@ const community = [
 ];
 
 const behindTheBurger = [
-  { image: '/images/culture-founder.webp', name: 'The Founder', detail: 'Meet Nathan Zakkas, owner and founder. Public-facing, hands-on, and still works the grill.', ratio: '1067/1600' },
-  { image: '/images/culture-crew.webp', name: 'The Crew', detail: 'Green aprons, black bandanas, high-volume nights. The family that makes it happen.', ratio: '1800/1200' },
-  { image: '/images/culture-collabs.webp', name: 'The Collabs', detail: 'Bless Yer Heart, Hoptown Beer Bar  — real partnerships, full brand takeovers.', ratio: '1179/1447' },
+  { image: '/images/culture-founder.webp', name: 'The Founder', detail: 'Meet Nathan Zakkas, owner and founder. Public-facing, hands-on, and still works the grill.' },
+  { image: '/images/culture-crew.webp', name: 'The Crew', detail: 'Green aprons, black bandanas, high-volume nights. The family that makes it happen.', position: '40% 50%' },
+  { image: '/images/culture-collabs.webp', name: 'The Collabs', detail: 'Bless Yer Heart, Hoptown Beer Bar  — real partnerships, full brand takeovers.' },
 ];
 ---
 
@@ -49,8 +49,8 @@ const behindTheBurger = [
       <div class="meet-grid">
         {behindTheBurger.map((item) => (
           <div class="meet-card">
-            <div class="meet-card-imgwrap" style={`aspect-ratio: ${item.ratio}`}>
-              <img src={item.image} alt={item.name} loading="lazy" class="parallax-img" />
+            <div class="meet-card-imgwrap">
+              <img src={item.image} alt={item.name} loading="lazy" class="parallax-img" style={item.position ? `object-position: ${item.position}` : undefined} />
             </div>
             <h3 class="h3 reveal-up">{item.name}</h3>
             <p class="reveal-up">{item.detail}</p>
@@ -160,6 +160,7 @@ const behindTheBurger = [
     position: relative;
     overflow: hidden;
     border-radius: 15px;
+    aspect-ratio: 5/7;
     margin-bottom: var(--space-4);
   }
   .meet-card-imgwrap .parallax-img {
