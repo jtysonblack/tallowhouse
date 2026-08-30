@@ -21,6 +21,26 @@ const photos: Record<string, string> = {
   title="Menu"
   description="One Smashburger, One Way, The Way. Grassfed beef, sourdough baked daily, hand-cut tallow fries. Simple, intentional, done perfectly."
 >
+  <section class="category-section combos-section" id="combos">
+    <div class="container">
+      <h1 class="category-heading">House Combos</h1>
+      <p class="combos-note">{menu.combos.note}</p>
+
+      <div class="combos-list">
+        {menu.combos.items.map((c) => (
+          <div class="combo-row">
+            <div class="combo-row-main">
+              <span class="combo-name">{c.name}</span>
+              <span class="combo-leader"></span>
+              <span class="combo-price">{c.comboPrice}</span>
+            </div>
+            <span class="combo-burger-note">{c.burgerName} only — {c.burgerPrice}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   {categories.map((cat) => (
     <section class="category-section" id={cat.id}>
       <div class="container">
@@ -50,7 +70,7 @@ const photos: Record<string, string> = {
         <img src="/images/menu-crew.webp" alt="The Tallow House crew at work behind the counter" loading="lazy" />
       </div>
       <div class="process-copy">
-        <h2 class="h2">One Smashburger, One Way.</h2>
+        <h2 class="h2">Pure Smashburgers, The Way It Should Be.</h2>
         <p class="body-lg">
           Grassfed beef, smashed hot on the flat top until the edges go dark and crispy.
           Sourdough buns baked daily, in-house. Fries hand-cut from whole potatoes and
@@ -85,6 +105,48 @@ const photos: Record<string, string> = {
     line-height: 0.9;
   }
 
+  .combos-note {
+    margin-top: var(--space-4);
+    color: var(--text-secondary);
+    font-size: var(--text-lg);
+  }
+  .combos-list {
+    margin-top: var(--space-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  .combo-row-main {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+  }
+  .combo-name {
+    font-family: 'Archivo', var(--font-display), sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    flex-shrink: 0;
+  }
+  .combo-leader {
+    flex: 1;
+    border-bottom: 3px dotted var(--border-strong);
+    margin-bottom: 0.4em;
+  }
+  .combo-price {
+    font-family: 'Archivo', var(--font-display), sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    color: var(--text-brand);
+    flex-shrink: 0;
+  }
+  .combo-burger-note {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
   .category-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -109,7 +171,7 @@ const photos: Record<string, string> = {
     left: 16px;
     right: 16px;
     bottom: 16px;
-    height: 172px;
+    height: 129px;
     background: var(--cream-50);
     border-radius: 24px;
     padding: 20px 28px;

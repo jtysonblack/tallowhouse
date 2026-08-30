@@ -1,4 +1,13 @@
 {
+  "combos": {
+    "title": "House Combos",
+    "note": "Combos include burger, fries, and a drink.",
+    "items": [
+      { "name": "Single Combo", "burgerName": "Single Smashburger", "comboPrice": "$12", "burgerPrice": "$8" },
+      { "name": "Double Combo", "burgerName": "Double Smashburger", "comboPrice": "$14", "burgerPrice": "$11" },
+      { "name": "Triple Combo", "burgerName": "Triple Smashburger", "comboPrice": "$17", "burgerPrice": "$14" }
+    ]
+  },
   "burgers": {
     "title": "Smashburgers",
     "description": "Double grassfed patty, cheddar, grilled onions, pickles, house sauce. Sourdough buns baked daily. One way, the way.",
