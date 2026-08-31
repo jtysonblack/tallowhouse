@@ -109,6 +109,13 @@ const pastEvents = [
     </div>
   </section>
 
+  <section class="past-events-video-band">
+    <video autoplay muted loop playsinline>
+      <source src="/video/events-busy.webm" type="video/webm" />
+      <source src="/video/events-busy.mp4" type="video/mp4" />
+    </video>
+  </section>
+
   <section class="section section-dark past-events-section">
     <div class="container">
       <h2 class="h2">We've Been Busy.</h2>
@@ -130,6 +137,17 @@ const pastEvents = [
   .events-hero-desc { max-width: 60ch; margin-top: var(--space-4); margin-left: auto; color: var(--cream-400); }
 
   .events-form-desc { max-width: 60ch; margin-top: var(--space-3); color: var(--cream-400); }
+
+  .past-events-video-band {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+  .past-events-video-band video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   .past-events-grid {
     display: grid;
