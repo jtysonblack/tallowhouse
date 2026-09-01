@@ -17,13 +17,11 @@ import hours from '../data/hours.json';
         <ul class="join-reqs">
           <li>Must be comfortable with high kitchen volume</li>
           <li>Very competitive pay</li>
-          <li>Full time position</li>
         </ul>
 
         <form
           name="job-application"
           method="POST"
-          enctype="multipart/form-data"
           data-netlify="true"
           netlify-honeypot="bot-field"
           action="/thank-you"
@@ -37,33 +35,63 @@ import hours from '../data/hours.json';
           <label for="name" class="visually-hidden">Full Name</label>
           <input type="text" id="name" name="name" placeholder="Full Name" required />
 
-          <label for="phone" class="visually-hidden">Phone</label>
-          <input type="tel" id="phone" name="phone" placeholder="Phone" required />
+          <label for="phone" class="visually-hidden">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="Phone Number" required />
 
-          <label for="email" class="visually-hidden">Email</label>
-          <input type="email" id="email" name="email" placeholder="Email" required />
+          <label for="email" class="visually-hidden">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Email Address" required />
 
-          <label for="position" class="visually-hidden">Position Interest</label>
-          <select id="position" name="position" required>
-            <option value="">Position Interest</option>
-            <option>Grill Cook</option>
-            <option>Front Counter / Team</option>
-            <option>Other</option>
+          <label for="age-eligible" class="app-form-question-label">
+            Are you 16 years or older and legally eligible to work in the US?
+          </label>
+          <select id="age-eligible" name="age_eligible" required>
+            <option value="">Select one</option>
+            <option>Yes</option>
+            <option>No</option>
           </select>
 
-          <label for="availability" class="visually-hidden">Availability</label>
-          <input type="text" id="availability" name="availability" placeholder="Availability — e.g. evenings, weekends, full-time" required />
-
-          <label for="experience" class="visually-hidden">Previous Experience</label>
-          <textarea id="experience" name="previous_experience" rows="3" placeholder="Previous Experience"></textarea>
-
-          <label for="resume" class="app-form-file-label">
-            Attach Resume <span class="app-form-file-hint">(PDF or Word doc)</span>
+          <label for="hours-desired" class="app-form-question-label">
+            How many hours are you looking to work per week?
           </label>
-          <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" />
+          <select id="hours-desired" name="hours_desired" required>
+            <option value="">Select one</option>
+            <option>Part-time</option>
+            <option>Full-time</option>
+          </select>
 
-          <label for="message" class="visually-hidden">Anything else we should know?</label>
-          <textarea id="message" name="message" rows="4" placeholder="Anything else we should know?"></textarea>
+          <label for="availability" class="app-form-question-label">
+            What days and shifts are you available, and when can you start?
+          </label>
+          <input type="text" id="availability" name="availability" required />
+
+          <label for="food-service-experience" class="app-form-question-label">
+            Tell us about your previous work experience, specifically in food service or customer service.
+          </label>
+          <textarea id="food-service-experience" name="food_service_experience" rows="4" required></textarea>
+
+          <label for="high-pressure-experience" class="app-form-question-label">
+            Describe a time you had to handle a high pressure situation or a very busy rush at work.
+          </label>
+          <textarea id="high-pressure-experience" name="high_pressure_experience" rows="4" required></textarea>
+
+          <label for="food-safety-cert" class="app-form-question-label">
+            Do you have any current food safety certifications (e.g., ServSafe)?
+          </label>
+          <select id="food-safety-cert" name="food_safety_cert" required>
+            <option value="">Select one</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+
+          <label for="why-tallow-house" class="app-form-question-label">
+            Why do you want to work at Tallow House?
+          </label>
+          <textarea id="why-tallow-house" name="why_tallow_house" rows="4" required></textarea>
+
+          <label for="team-player" class="app-form-question-label">
+            Our team works closely together in a fast paced environment. What makes you a great team player?
+          </label>
+          <textarea id="team-player" name="team_player" rows="4" required></textarea>
 
           <button type="submit" class="mac-submit">
             Submit Application
@@ -78,6 +106,8 @@ import hours from '../data/hours.json';
         <img src="/images/careers-team-plating.jpg" alt="Team plating burgers behind the counter" loading="lazy" />
         <img src="/images/careers-grill-action.jpg" alt="Raw smash patties on the flat top with fryer baskets" loading="lazy" />
         <img src="/images/careers-cook-portrait.jpg" alt="Cook in a Tallow House cap at the flat top grill" loading="lazy" />
+        <img src="/images/careers-line-outside.jpg" alt="Customers lined up outside the Tallow House storefront" loading="lazy" />
+        <img src="/images/careers-order-pass.jpg" alt="Cook at the order pass with bagged orders ready for pickup" loading="lazy" />
       </div>
     </div>
   </section>
@@ -229,38 +259,16 @@ import hours from '../data/hours.json';
     width: auto;
     justify-self: center;
   }
-  .app-form-file-label {
+  .app-form-question-label {
     grid-column: 1 / -1;
     font-family: var(--font-display);
     letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    font-size: var(--text-sm);
-    color: var(--cream-300);
+    font-size: clamp(1.05rem, 2.1vw, 1.35rem);
+    line-height: 1.2;
+    color: var(--cream-100);
+    margin-top: var(--space-2);
+    margin-bottom: -0.25rem;
   }
-  .app-form-file-hint {
-    text-transform: none;
-    letter-spacing: normal;
-    font-family: var(--font-body);
-    color: var(--cream-600);
-  }
-  .app-form input[type="file"] {
-    grid-column: 1 / -1;
-    font-size: var(--text-sm) !important;
-  }
-  .app-form input[type="file"]::file-selector-button {
-    font-family: var(--font-display);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    font-size: var(--text-xs);
-    border: none;
-    background: var(--sage-600);
-    color: var(--cream-50);
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-full);
-    margin-right: var(--space-3);
-    cursor: pointer;
-  }
-  .app-form input[type="file"]::file-selector-button:hover { background: var(--sage-500); }
 
   .hidden-field { position: absolute; left: -9999px; }
   .form-row { display: flex; flex-direction: column; gap: var(--space-2); }

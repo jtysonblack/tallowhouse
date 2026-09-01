@@ -1,0 +1,344 @@
+---
+import site from '../data/site.json';
+
+interface Review {
+  author: string;
+  date: string;
+  quote: string;
+}
+
+const rating = '4.7';
+const reviewCount = '250';
+
+const reviews: Review[] = [
+  {
+    author: 'Tony Walker',
+    date: '3 months ago',
+    quote: "This has got to be one of the best burgers I've ever ate. The bun was fresh and with just simple ingredients it was so good. High quality pickles and grilled onions. I got there an hour before they open and waited but it was wroth it. The fries were good but needed a little more salt for my taste. This is a MOST TRY place.",
+  },
+  {
+    author: 'Rene Arellano',
+    date: '2 months ago',
+    quote: "Tallow House absolutely nailed what so many restaurants have forgotten: real food made with real ingredients. As someone who's constantly disappointed by the seed oils, frozen patties, corn syrup, and processed ingredients that dominate the restaurant industry, this place was a breath of fresh air. Fresh beef, fries cooked in beef tallow, a sourdough bun instead of the typical processed bread, and no high fructose corn syrup. They even serve filtered water for free, which tells me they genuinely care about quality from top to bottom. The restaurant itself is small, and when we got there there was already a line out the door. Honestly, that's a good sign. People are hungry for restaurants that prioritize quality over cutting corners. My only “complaint” is that I hope they can figure out how to scale this concept without sacrificing what makes them special. America desperately needs more places like this. If they can keep the same commitment to clean ingredients and consistency, I could absolutely see Tallow House becoming a national brand. I'll gladly wait in line for food like this. It's refreshing to finally support a restaurant that's proving you don't have to compromise on ingredients to make an incredible burger. I'll definitely be back.",
+  },
+  {
+    author: 'Paul Pototsky',
+    date: '2 months ago',
+    quote: "Showed up and the line was already long 20 minutes after opening. That's when you know the food about to be 🔥! Ended up waiting for about 45 minutes in line and it was worth every minute. We were offered water while waiting in line which was super thoughtful. The prices were very fair as well. Food came out almost immediately after ordering which was very pleasant not having to wait for the food after waiting in line to order. The burger tasted very fresh and clean. Also was super juicy and delicious! The tallow fries were also spot on, especially with the spicy ketchup! Highly recommend! Worth the wait",
+  },
+  {
+    author: 'Tracy H',
+    date: '4 weeks ago',
+    quote: "Finally got to try The Tallow House smash burgers and fries. Let me tell you, it totally lived up to the hype. Great burgers, best I've had...the beef tallow really makes a difference! The sourdough bun too. A must stop when you're in Cleveland, Tennessee!",
+  },
+  {
+    author: 'Lael',
+    date: 'a month ago',
+    quote: "Amazing! Ever since yall have opened, I have been so excited to go. But the timing never worked out for me and my super early lunch times from early shifts at work. Today I had to take lunch by 11 (TN 6hr law haha), and I finally got my hands on it! Amazing burger and out of this world fries. Definitely hope to see you guys expand and open your own bigger restaurant. My coworkers have not stopped talking about it for months so I've been bugging myself to go! Tallow fries are not to be taken likely! Only a 17min wait today",
+  },
+  {
+    author: 'Oliver Price',
+    date: '2 months ago',
+    quote: 'Probably the best smash burger I’ve ever had. Seriously worth all the hype I was hearing. Fries are great too and the house sauce on the burger and spicy ketchup are both fire. 10/10 food and super nice people working',
+  },
+  {
+    author: 'Andrew Coffey',
+    date: 'a month ago',
+    quote: 'I rank burgers from all around the world. Heard of this place through some locals and decided to try it. Only open for 4 hours so lines get long. Easily the best burger I have ever eaten. Juicy smash burgers, perfectly crisp fries and a great house sauce. If you are a burger fan, you have to try this place. Changed my life.',
+  },
+  {
+    author: 'Chris Cole',
+    date: '3 months ago',
+    quote: "Just tried the newest burger spot in Cleveland and WOW. If you are a true burger lover, you HAVE to check out Tallow House at 4602 N. Lee Highway next to the gas station. Everything about this place was incredible. The burgers came out fast, hot, and absolutely delicious. Perfect smashburger with those crispy edges everyone wants, juicy beef, succulent grilled onions, real cheddar, and the house-made burger sauce was unreal. The fresh locally sourced sourdough bun took it to another level. Even the tallow fries were amazing. Crispy, fresh, and packed with flavor. You can tell they actually care about quality ingredients here. The atmosphere was simple, clean, and built around one thing… making an outstanding burger. This is not your average fast food burger joint. This is a burger place built FOR burger lovers. Easily one of the best burgers I've had in the Cleveland area. 10/10. Absolutely a must-try.",
+  },
+  {
+    author: 'Gabriel Rodriguez',
+    date: '2 months ago',
+    quote: "Best burgers in the area—10/10! I would definitely recommend this place to anyone looking for great burgers and fries. I'll definitely be coming back, and I'm telling all my friends and family to stop by. Highly recommended!",
+  },
+  {
+    author: 'M R',
+    date: '3 months ago',
+    quote: 'Hands down thee best burger! Clean and organic ingredients is what I like! Super friendly staff! Burger was the best I’ve ever had! It’s a small place but they work fast and diligently! Highly recommend checking them out! Will be back!',
+  },
+  {
+    author: 'Dawson Jones',
+    date: 'a month ago',
+    quote: "Possibly the best burger I've ever had. No complaints about any of the food. The bun was incredible, it made me realize how little I think about buns on burgers usually and how much they can actually contribute. Must have gone at a good time because I waited less than ten minutes in the line and less than five minutes for food! Bring one to Chattanooga!",
+  },
+  {
+    author: 'Bryant Choate',
+    date: '2 months ago',
+    quote: 'Tallow House absolutely knocked it out of the park! The smash burgers were perfectly crispy on the edges, incredibly juicy, and packed with flavor. You can tell they use quality ingredients, and everything tasted fresh. The fries were fantastic, the service was friendly and fast, and the atmosphere made the whole experience even better. If you’re looking for one of the best burgers around, Tallow House is a must-try.',
+  },
+  {
+    author: 'Mason Frierson',
+    date: '3 months ago',
+    quote: "Alright y'all…I may have found one of the best burger spots in Southeast Tennessee. If you've been on social media, there's a fast food place that's living up to hype! I got back from Tallow House Burger in Cleveland, Tennessee where I've been in line for over 30 minutes just to get my order. And believe me, it's worth the wait and you get your money's worth! They make fresh smash burgers with grassfed beef, real cheddar, grilled onions, pickles, homemade sauce in between sourdough buns with hand-cut fries cooked in beef tallow served on the side. And they don't use any seed oils to cook their food. If any of y'all are craving for burgers and fries head over to Tallow House Burger!",
+  },
+];
+
+const avatarColors = ['var(--sage-600)', 'var(--amber-600)', 'var(--rust-600)', 'var(--sage-800)', 'var(--sage-700)'];
+
+const reviewUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Tallow House Burger ' + site.location.mapQuery)}`;
+---
+
+<div class="google-reviews">
+  <div class="gr-header">
+    <div class="gr-header-left">
+      <svg class="gr-google-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+        <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+        <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/>
+        <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+      </svg>
+      <div class="gr-header-text">
+        <p class="gr-excellent">Excellent on Google</p>
+        <div class="gr-rating-row">
+          <span class="gr-stars" aria-hidden="true">★★★★★</span>
+          <span class="gr-rating-detail">{rating} out of 5 based on {reviewCount} reviews</span>
+        </div>
+      </div>
+    </div>
+    <a href={reviewUrl} target="_blank" rel="noopener noreferrer" class="gr-cta">Review Us on Google</a>
+  </div>
+
+  <div class="gr-carousel">
+    <button class="gr-arrow gr-arrow--prev" type="button" aria-label="Previous reviews">‹</button>
+    <div class="gr-track" tabindex="0" aria-label="Google reviews, scrollable">
+      {reviews.map((r, i) => (
+        <div class="gr-card">
+          <div class="gr-card-top">
+            <span class="gr-avatar" style={`background:${avatarColors[i % avatarColors.length]}`}>{r.author.charAt(0)}</span>
+            <div class="gr-card-id">
+              <span class="gr-name">{r.author}</span>
+              <span class="gr-source">
+                <svg class="gr-mini-g" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+                  <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+                  <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/>
+                  <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+                </svg>
+                {r.date}
+              </span>
+            </div>
+          </div>
+          <span class="gr-card-stars" aria-hidden="true">★★★★★</span>
+          <p class="gr-quote">{r.quote}</p>
+          <button type="button" class="gr-readmore" aria-expanded="false">Read more</button>
+        </div>
+      ))}
+    </div>
+    <button class="gr-arrow gr-arrow--next" type="button" aria-label="Next reviews">›</button>
+  </div>
+</div>
+
+<script>
+  function initGoogleReviewsCarousel() {
+    const carousel = document.querySelector<HTMLElement>('.google-reviews');
+    if (!carousel || carousel.dataset.grInit) return;
+    carousel.dataset.grInit = 'true';
+
+    const track = carousel.querySelector<HTMLElement>('.gr-track');
+    const prev = carousel.querySelector<HTMLButtonElement>('.gr-arrow--prev');
+    const next = carousel.querySelector<HTMLButtonElement>('.gr-arrow--next');
+    if (!track || !prev || !next) return;
+
+    function scrollByCard(dir: number) {
+      const card = track!.querySelector<HTMLElement>('.gr-card');
+      const step = card ? card.getBoundingClientRect().width + 20 : 320;
+      track!.scrollBy({ left: dir * step, behavior: 'smooth' });
+    }
+
+    prev.addEventListener('click', () => scrollByCard(-1));
+    next.addEventListener('click', () => scrollByCard(1));
+
+    carousel.querySelectorAll<HTMLElement>('.gr-card').forEach((card) => {
+      const quote = card.querySelector<HTMLElement>('.gr-quote');
+      const btn = card.querySelector<HTMLButtonElement>('.gr-readmore');
+      if (!quote || !btn) return;
+
+      if (quote.scrollHeight <= quote.clientHeight + 2) {
+        btn.style.display = 'none';
+        return;
+      }
+
+      btn.addEventListener('click', () => {
+        const expanded = card.classList.toggle('is-expanded');
+        btn.textContent = expanded ? 'Read less' : 'Read more';
+        btn.setAttribute('aria-expanded', String(expanded));
+      });
+    });
+  }
+  initGoogleReviewsCarousel();
+  document.addEventListener('astro:page-load', initGoogleReviewsCarousel);
+</script>
+
+<style>
+  .google-reviews {
+    background: var(--bg-surface);
+    border: var(--border-thin) solid var(--border-default);
+    border-radius: var(--radius-xl);
+    padding: clamp(20px, 4vw, 40px);
+  }
+
+  .gr-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    margin-bottom: var(--space-8);
+  }
+  .gr-header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .gr-google-icon { width: 36px; height: 36px; flex-shrink: 0; }
+  .gr-excellent {
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    font-size: var(--text-lg);
+    color: var(--text-primary);
+  }
+  .gr-rating-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: 2px;
+  }
+  .gr-stars { color: var(--amber-500); font-size: var(--text-md); letter-spacing: 1px; }
+  .gr-rating-detail { font-size: var(--text-sm); color: var(--text-secondary); font-weight: 600; }
+
+  .gr-cta {
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    transition: var(--transition-colors);
+  }
+  .gr-cta:hover { background: var(--btn-primary-hover); }
+
+  .gr-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .gr-track {
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-5);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-behavior: smooth;
+    padding-bottom: var(--space-2);
+    scrollbar-width: none;
+  }
+  .gr-track::-webkit-scrollbar { display: none; }
+
+  .gr-card {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    width: min(300px, 78vw);
+    background: var(--bg-card);
+    border: var(--border-thin) solid var(--border-default);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+  }
+  .gr-card-top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+  .gr-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cream-50);
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    font-size: var(--text-md);
+    flex-shrink: 0;
+  }
+  .gr-card-id { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .gr-name {
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .gr-source {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .gr-mini-g { width: 12px; height: 12px; flex-shrink: 0; }
+
+  .gr-card-stars { display: block; color: var(--amber-500); font-size: var(--text-sm); letter-spacing: 1px; margin-bottom: var(--space-2); }
+  .gr-quote {
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .gr-card.is-expanded .gr-quote {
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+  .gr-readmore {
+    align-self: flex-start;
+    margin-top: var(--space-2);
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+    color: var(--text-brand);
+    cursor: pointer;
+  }
+  .gr-readmore:hover { text-decoration: underline; }
+
+  .gr-arrow {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: var(--border-thin) solid var(--border-default);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-colors);
+  }
+  .gr-arrow:hover { background: var(--bg-brand-subtle); border-color: var(--border-brand); color: var(--text-brand); }
+
+  @media (max-width: 600px) {
+    .gr-arrow { display: none; }
+  }
+</style>

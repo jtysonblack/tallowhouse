@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import GoogleReviews from '../components/GoogleReviews.astro';
 
 const newsVideos = [
   { type: 'youtube', id: 'iqoFUIJD61E', caption: 'Tallow House is making its mark as locals line up for burgers' },
@@ -11,18 +12,6 @@ const influencerVideos = [
   { type: 'instagram', url: 'https://www.instagram.com/reel/DY0SiB6PnR7/', thumb: '/images/wots-ig-dadbodcooking.webp', caption: '@dadbod.cooking' },
   { type: 'instagram', url: 'https://www.instagram.com/reel/DZ5OhDllBnH/', thumb: '/images/wots-ig-local3news.webp', caption: '@local3news — "The Viral Burger"' },
 ];
-
-const ratings = [
-  { source: 'Google', rating: '4.8', count: '241 reviews' },
-];
-
-const reviews = [
-  { source: 'Google', quote: "And you can't go wrong with tallow cooked fries, and homemade spicy ketchup.", author: 'Google review' },
-  { source: 'Google', quote: 'Great bun, fresh beef, the secret sauce is what makes it.', author: 'Google review' },
-  { source: 'Google', quote: 'They genuinely care about their service and quality of food.', author: 'Google review' },
-  { source: 'Google', quote: 'Meat and cheese and a little bit of grilled onions.', author: 'Google review' },
-];
-const reviewsLoop = Array.from({ length: 3 }).flatMap(() => reviews);
 ---
 
 <Layout
@@ -81,26 +70,7 @@ const reviewsLoop = Array.from({ length: 3 }).flatMap(() => reviews);
   <section class="section wots-reviews-section">
     <div class="container">
       <h2 class="h2">From The Reviews</h2>
-      <div class="wots-rating-row">
-        {ratings.map((r) => (
-          <div class="wots-rating-badge">
-            <span class="wots-rating-source">{r.source}</span>
-            <span class="wots-rating-score">{r.rating} <span class="wots-rating-star">★</span></span>
-            <span class="wots-rating-count">{r.count}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-    <div class="wots-review-marquee">
-      <div class="wots-review-track">
-        {reviewsLoop.map((r) => (
-          <div class="wots-review-card">
-            <span class="wots-review-source">{r.source}</span>
-            <p class="wots-review-quote">"{r.quote}"</p>
-            <p class="wots-review-author">— {r.author}</p>
-          </div>
-        ))}
-      </div>
+      <GoogleReviews />
     </div>
   </section>
 </Layout>
@@ -167,72 +137,7 @@ const reviewsLoop = Array.from({ length: 3 }).flatMap(() => reviews);
   .wots-video-card p { color: var(--text-secondary); margin-top: var(--space-1); font-size: var(--text-sm); }
   .wots-press-section .wots-video-card p { color: var(--cream-400); }
 
-  .wots-rating-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-6);
+  .wots-reviews-section :global(.google-reviews) {
     margin-top: var(--space-8);
   }
-  .wots-rating-badge {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: var(--space-4) var(--space-6);
-    border: var(--border-thin) solid var(--border-default);
-    border-radius: var(--radius-lg);
-  }
-  .wots-rating-source {
-    font-family: var(--font-display);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    font-size: var(--text-sm);
-    color: var(--text-secondary);
-  }
-  .wots-rating-score {
-    font-family: var(--font-display);
-    font-size: var(--text-3xl);
-    color: var(--text-primary);
-  }
-  .wots-rating-star { color: var(--amber-500); }
-  .wots-rating-count { font-size: var(--text-sm); color: var(--text-muted); }
-
-  .wots-review-marquee {
-    width: 100%;
-    overflow: hidden;
-    margin-top: var(--space-10);
-  }
-  .wots-review-track {
-    display: flex;
-    width: max-content;
-    gap: var(--space-6);
-    padding-inline: var(--section-x);
-    animation: wots-review-scroll 110s linear infinite;
-  }
-  .wots-review-marquee:hover .wots-review-track {
-    animation-play-state: paused;
-  }
-  @keyframes wots-review-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-33.333%); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .wots-review-track { animation: none; }
-  }
-  .wots-review-card {
-    flex-shrink: 0;
-    width: min(360px, 82vw);
-    border: var(--border-thin) solid var(--border-default);
-    background: var(--bg-surface);
-    border-radius: var(--radius-lg);
-    padding: var(--space-6);
-  }
-  .wots-review-source {
-    font-family: var(--font-display);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    font-size: var(--text-sm);
-    color: var(--text-brand);
-  }
-  .wots-review-quote { margin-top: var(--space-3); color: var(--text-primary); }
-  .wots-review-author { margin-top: var(--space-3); color: var(--text-muted); font-size: var(--text-sm); }
 </style>
