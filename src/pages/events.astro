@@ -81,13 +81,27 @@ import Layout from '../layouts/Layout.astro';
       <h2 class="h2">We've Been Busy.</h2>
     </div>
     <div class="past-events-video-band">
-      <video autoplay muted loop playsinline>
+      <video class="events-busy-video" autoplay muted loop playsinline>
         <source src="/video/events-busy.webm" type="video/webm" />
         <source src="/video/events-busy.mp4" type="video/mp4" />
       </video>
     </div>
   </section>
 </Layout>
+
+<script>
+  // Astro's client router can leave this video unstarted on first navigation
+  // into the page (autoplay doesn't reliably fire on a client-side page
+  // swap) — force it to load and play once the page is actually live.
+  function startEventsVideo() {
+    const video = document.querySelector<HTMLVideoElement>('.events-busy-video');
+    if (!video) return;
+    if (video.readyState === 0) video.load();
+    const playPromise = video.play();
+    if (playPromise) playPromise.catch(() => {});
+  }
+  document.addEventListener('astro:page-load', startEventsVideo);
+</script>
 
 <style>
   .events-hero { text-align: right; }
