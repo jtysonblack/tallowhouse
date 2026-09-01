@@ -8,6 +8,8 @@ const community = [
   { image: '/images/community-police-carmeet.webp', name: 'DJ Nights', detail: 'DJ IDK on the decks, late-night service, the energy of a drop.' },
 ];
 
+const momPhoto: string | null = null;
+
 const founders = [
   { image: '/images/culture-founder.webp', name: 'Nathan Zakkas' },
   { image: '/images/culture-founder-tony.webp', name: 'Tony' },
@@ -42,12 +44,23 @@ const crewCollabs = [
     </div>
   </section>
 
+  <section class="section culture-mom-photo-section">
+    <div class="container-narrow culture-mom-photo-wrap">
+      {momPhoto ? (
+        <img src={momPhoto} alt="Nathan's mom at Tallow House" loading="lazy" class="culture-mom-photo" />
+      ) : (
+        <span class="founder-card-placeholder">Photo coming soon</span>
+      )}
+    </div>
+  </section>
+
   <section class="section founders-section">
     <div class="container">
       <div class="meet-head">
         <h2 class="meet-heading">
+          <span class="reveal-word">Behind</span>
           <span class="reveal-word">The</span>
-          <span class="reveal-word">Founders</span>
+          <span class="reveal-word">Burger</span>
         </h2>
       </div>
       <div class="founders-grid">
@@ -179,6 +192,20 @@ const crewCollabs = [
   .reveal-word:nth-child(3) { transition-delay: 0.16s; }
   .reveal-word.is-visible { transform: translateY(0); opacity: 1; }
 
+  .culture-mom-photo-section { padding-bottom: 0; }
+  .culture-mom-photo-wrap {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background: var(--bg-surface);
+  }
+  .culture-mom-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   .founders-grid {
     display: grid;
     gap: var(--space-6);
@@ -219,6 +246,7 @@ const crewCollabs = [
     margin-top: var(--space-10);
     color: var(--text-secondary);
   }
+  .founders-section { padding-bottom: var(--space-8); }
 
   .meet-grid {
     display: grid;
