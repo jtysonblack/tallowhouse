@@ -206,7 +206,10 @@ const reviewsLoop = Array.from({ length: 3 }).flatMap(() => reviews);
     width: max-content;
     gap: var(--space-6);
     padding-inline: var(--section-x);
-    animation: wots-review-scroll 44s linear infinite;
+    animation: wots-review-scroll 110s linear infinite;
+  }
+  .wots-review-marquee:hover .wots-review-track {
+    animation-play-state: paused;
   }
   @keyframes wots-review-scroll {
     from { transform: translateX(0); }

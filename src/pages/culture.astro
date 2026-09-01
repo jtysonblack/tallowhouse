@@ -8,7 +8,7 @@ const community = [
   { image: '/images/community-police-carmeet.webp', name: 'DJ Nights', detail: 'DJ IDK on the decks, late-night service, the energy of a drop.' },
 ];
 
-const momPhoto: string | null = null;
+const momPhoto: string | null = '/images/culture-mom.webp';
 
 const founders = [
   { image: '/images/culture-founder.webp', name: 'Nathan Zakkas' },
@@ -33,7 +33,7 @@ const crewCollabs = [
   </section>
 
   <section class="section culture-story">
-    <div class="container-narrow">
+    <div class="container culture-story-grid">
       <p class="body-lg">
         "I'm building a brand, not just a burger place." That's the whole thesis.
         Founder Nathan Zakkas set out to bring something Cleveland, TN hadn't seen —
@@ -41,16 +41,13 @@ const crewCollabs = [
         menu with the confidence to stay small on purpose. He's still working the
         grill most nights the lights are on.
       </p>
-    </div>
-  </section>
-
-  <section class="section culture-mom-photo-section">
-    <div class="container-narrow culture-mom-photo-wrap">
-      {momPhoto ? (
-        <img src={momPhoto} alt="Nathan's mom at Tallow House" loading="lazy" class="culture-mom-photo" />
-      ) : (
-        <span class="founder-card-placeholder">Photo coming soon</span>
-      )}
+      <div class="culture-mom-photo-wrap">
+        {momPhoto ? (
+          <img src={momPhoto} alt="Nathan's mom at Tallow House" loading="lazy" class="culture-mom-photo" />
+        ) : (
+          <span class="founder-card-placeholder">Photo coming soon</span>
+        )}
+      </div>
     </div>
   </section>
 
@@ -169,6 +166,11 @@ const crewCollabs = [
   }
 
   .culture-story .body-lg { color: var(--text-secondary); }
+  .culture-story-grid {
+    display: grid;
+    gap: var(--space-8);
+    align-items: center;
+  }
 
   .meet-head { margin-bottom: var(--space-10); }
   .meet-heading {
@@ -192,7 +194,6 @@ const crewCollabs = [
   .reveal-word:nth-child(3) { transition-delay: 0.16s; }
   .reveal-word.is-visible { transform: translateY(0); opacity: 1; }
 
-  .culture-mom-photo-section { padding-bottom: 0; }
   .culture-mom-photo-wrap {
     position: relative;
     border-radius: 15px;
@@ -332,6 +333,10 @@ const crewCollabs = [
     transform: translate(-50%, -50%);
     width: min(220px, 30vw);
     filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.6));
+  }
+
+  @media (min-width: 800px) {
+    .culture-story-grid { grid-template-columns: 1.1fr 0.9fr; }
   }
 </style>
 

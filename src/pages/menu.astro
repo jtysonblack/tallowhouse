@@ -7,6 +7,12 @@ const categories = [
   { id: 'sides', label: 'Fries', data: menu.sides },
 ];
 
+const whyDifferent = [
+  { image: '/images/menu-poster-different.webp', name: "Why We're Different" },
+  { image: '/images/menu-poster-smashburger.webp', name: 'The Pure Smashburger' },
+  { image: '/images/menu-poster-fries.webp', name: 'Hand-Cut Tallow Fries' },
+];
+
 const photos: Record<string, string> = {
   'Single Smashburger': '/images/menu-single.webp',
   'Double Smashburger': '/images/menu-double.webp',
@@ -21,6 +27,22 @@ const photos: Record<string, string> = {
   title="Menu"
   description="One Smashburger, One Way, The Way. Grassfed beef, sourdough baked daily, hand-cut tallow fries. Simple, intentional, done perfectly."
 >
+  <section class="category-section why-different-section" id="why-different">
+    <div class="container">
+      <h1 class="category-heading">Why We're Different</h1>
+      <div class="founders-grid why-different-grid">
+        {whyDifferent.map((item) => (
+          <div class="founder-card">
+            <div class="founder-card-imgwrap why-different-imgwrap">
+              <img src={item.image} alt={item.name} loading="lazy" />
+            </div>
+            <h3 class="h3">{item.name}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section class="category-section combos-section" id="combos">
     <div class="container">
       <h1 class="category-heading">House Combos</h1>
@@ -112,6 +134,30 @@ const photos: Record<string, string> = {
     letter-spacing: normal;
     font-size: clamp(3.5rem, 13vw, 8.4rem);
     line-height: 0.9;
+  }
+
+  .why-different-grid {
+    margin-top: var(--space-10);
+  }
+  .founders-grid {
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .founder-card-imgwrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    margin-bottom: var(--space-4);
+    background: var(--bg-surface);
+  }
+  .why-different-imgwrap {
+    aspect-ratio: 2/3;
+  }
+  .why-different-imgwrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .combos-note {
