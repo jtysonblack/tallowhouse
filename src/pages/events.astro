@@ -76,16 +76,15 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <section class="past-events-video-band">
-    <video autoplay muted loop playsinline>
-      <source src="/video/events-busy.webm" type="video/webm" />
-      <source src="/video/events-busy.mp4" type="video/mp4" />
-    </video>
-  </section>
-
   <section class="section section-dark past-events-section">
     <div class="container">
       <h2 class="h2">We've Been Busy.</h2>
+    </div>
+    <div class="past-events-video-band">
+      <video autoplay muted loop playsinline>
+        <source src="/video/events-busy.webm" type="video/webm" />
+        <source src="/video/events-busy.mp4" type="video/mp4" />
+      </video>
     </div>
   </section>
 </Layout>
@@ -100,6 +99,7 @@ import Layout from '../layouts/Layout.astro';
     width: 100%;
     aspect-ratio: 16/9;
     overflow: hidden;
+    margin-top: var(--space-10);
   }
   .past-events-video-band video {
     width: 100%;
@@ -107,5 +107,5 @@ import Layout from '../layouts/Layout.astro';
     object-fit: cover;
   }
 
-  .past-events-section { padding-top: var(--space-8); }
+  .past-events-section { padding-bottom: 0; }
 </style>
