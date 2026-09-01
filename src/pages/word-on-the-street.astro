@@ -14,22 +14,20 @@ const influencerVideos = [
 
 const ratings = [
   { source: 'Google', rating: '4.8', count: '241 reviews' },
-  { source: 'Facebook', rating: '4.6', count: '33 reviews' },
 ];
 
 const reviews = [
   { source: 'Google', quote: "And you can't go wrong with tallow cooked fries, and homemade spicy ketchup.", author: 'Google review' },
   { source: 'Google', quote: 'Great bun, fresh beef, the secret sauce is what makes it.', author: 'Google review' },
   { source: 'Google', quote: 'They genuinely care about their service and quality of food.', author: 'Google review' },
-  { source: 'Facebook', quote: 'Best burger I have had in a long time! The plus was cooked in Beef Tallow!', author: 'Michelle Harrison McAfee' },
-  { source: 'Facebook', quote: 'TALLOW HOUSE is the truth!!! That\'s my review.', author: 'Extraordinaire' },
   { source: 'Google', quote: 'Meat and cheese and a little bit of grilled onions.', author: 'Google review' },
 ];
+const reviewsLoop = Array.from({ length: 3 }).flatMap(() => reviews);
 ---
 
 <Layout
   title="Word On The Street"
-  description="What people are saying about Tallow House — local news coverage, influencer reviews, and Google and Facebook reviews."
+  description="What people are saying about Tallow House — local news coverage, influencer reviews, and Google reviews."
 >
   <section class="section wots-hero section-dark">
     <div class="container">
@@ -92,8 +90,10 @@ const reviews = [
           </div>
         ))}
       </div>
-      <div class="wots-review-grid">
-        {reviews.map((r) => (
+    </div>
+    <div class="wots-review-marquee">
+      <div class="wots-review-track">
+        {reviewsLoop.map((r) => (
           <div class="wots-review-card">
             <span class="wots-review-source">{r.source}</span>
             <p class="wots-review-quote">"{r.quote}"</p>
@@ -196,13 +196,28 @@ const reviews = [
   .wots-rating-star { color: var(--amber-500); }
   .wots-rating-count { font-size: var(--text-sm); color: var(--text-muted); }
 
-  .wots-review-grid {
-    display: grid;
-    gap: var(--space-6);
+  .wots-review-marquee {
+    width: 100%;
+    overflow: hidden;
     margin-top: var(--space-10);
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  .wots-review-track {
+    display: flex;
+    width: max-content;
+    gap: var(--space-6);
+    padding-inline: var(--section-x);
+    animation: wots-review-scroll 44s linear infinite;
+  }
+  @keyframes wots-review-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-33.333%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wots-review-track { animation: none; }
   }
   .wots-review-card {
+    flex-shrink: 0;
+    width: min(360px, 82vw);
     border: var(--border-thin) solid var(--border-default);
     background: var(--bg-surface);
     border-radius: var(--radius-lg);

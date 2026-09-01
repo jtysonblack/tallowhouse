@@ -8,10 +8,15 @@ const community = [
   { image: '/images/community-police-carmeet.webp', name: 'DJ Nights', detail: 'DJ IDK on the decks, late-night service, the energy of a drop.' },
 ];
 
-const behindTheBurger = [
-  { image: '/images/culture-founder.webp', name: 'The Founder', detail: 'Meet Nathan Zakkas, owner and founder. Public-facing, hands-on, and still works the grill.' },
+const founders = [
+  { image: '/images/culture-founder.webp', name: 'Nathan Zakkas' },
+  { image: null, name: 'Tony' },
+  { image: null, name: 'Antonio' },
+];
+
+const crewCollabs = [
   { image: '/images/culture-crew.webp', name: 'The Crew', detail: 'Green aprons, black bandanas, high-volume nights. The family that makes it happen.', position: '40% 50%' },
-  { image: '/images/culture-collabs.webp', name: 'The Collabs', detail: 'Bless Yer Heart, Hoptown Beer Bar  — real partnerships, full brand takeovers.' },
+  { image: '/images/culture-collabs.webp', name: 'The Collabs', detail: 'ATS The Bridge, First Baptist, Bless Yer Heart, Hoptown Beer Bar, and more around the city — real partnerships, full brand takeovers.' },
 ];
 ---
 
@@ -37,17 +42,40 @@ const behindTheBurger = [
     </div>
   </section>
 
-  <section class="section meet-section">
+  <section class="section founders-section">
     <div class="container">
       <div class="meet-head">
         <h2 class="meet-heading">
-          <span class="reveal-word">Behind</span>
           <span class="reveal-word">The</span>
-          <span class="reveal-word">Burger</span>
+          <span class="reveal-word">Founders</span>
         </h2>
       </div>
+      <div class="founders-grid">
+        {founders.map((person) => (
+          <div class="founder-card">
+            <div class="founder-card-imgwrap">
+              {person.image ? (
+                <img src={person.image} alt={person.name} loading="lazy" class="parallax-img" />
+              ) : (
+                <span class="founder-card-placeholder">Photo coming soon</span>
+              )}
+            </div>
+            <h3 class="h3 reveal-up">{person.name}</h3>
+          </div>
+        ))}
+      </div>
+      <p class="body-lg founders-bio reveal-up">
+        Meet Nathan Zakkas, founder and creator of Tallow House. He pitched the idea
+        to his uncle Tony and his dad Antonio — the three of them make Tallow House
+        what it is today.
+      </p>
+    </div>
+  </section>
+
+  <section class="section meet-section">
+    <div class="container">
       <div class="meet-grid">
-        {behindTheBurger.map((item) => (
+        {crewCollabs.map((item) => (
           <div class="meet-card">
             <div class="meet-card-imgwrap">
               <img src={item.image} alt={item.name} loading="lazy" class="parallax-img" style={item.position ? `object-position: ${item.position}` : undefined} />
@@ -150,6 +178,47 @@ const behindTheBurger = [
   .reveal-word:nth-child(2) { transition-delay: 0.08s; }
   .reveal-word:nth-child(3) { transition-delay: 0.16s; }
   .reveal-word.is-visible { transform: translateY(0); opacity: 1; }
+
+  .founders-grid {
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .founder-card-imgwrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    aspect-ratio: 4/5;
+    margin-bottom: var(--space-4);
+    background: var(--bg-surface);
+  }
+  .founder-card-imgwrap .parallax-img {
+    position: absolute;
+    top: -3%;
+    left: 0;
+    width: 100%;
+    height: 106%;
+    object-fit: cover;
+    will-change: transform;
+  }
+  .founder-card-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-4);
+    border: 2px dashed var(--border-strong);
+    border-radius: 15px;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+  .founders-bio {
+    max-width: 65ch;
+    margin-top: var(--space-10);
+    color: var(--text-secondary);
+  }
 
   .meet-grid {
     display: grid;

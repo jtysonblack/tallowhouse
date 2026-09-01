@@ -1,38 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const pastEvents = [
-  {
-    image: '/images/community-hats-storefront.jpg',
-    name: 'The Drop Initiative',
-    detail: 'Free burgers, anti-drug awareness — partnered with ATS The Bridge at the Old Woolen Mill, Cleveland.',
-  },
-  {
-    image: '/images/community-carmeet-night.jpg',
-    name: 'Car Meets',
-    detail: 'The lot fills up with sports cars, motorcycles, and the community that shows up for it.',
-  },
-  {
-    image: '/images/community-dj-tent.jpg',
-    name: 'DJ Nights',
-    detail: 'DJ IDK on the decks for late-night service events — 8PM–SELLOUT energy.',
-  },
-  {
-    image: '/images/community-police-carmeet.jpg',
-    name: 'Bless Yer Heart Takeover',
-    detail: '233 E MLK Blvd, Chattanooga — a full brand takeover with a custom menu and drink program.',
-  },
-  {
-    image: '/images/community-crowd-family.jpg',
-    name: 'Hoptown Beer Bar Southside',
-    detail: '1617 Rossville Ave, Chattanooga — bringing Cleveland\'s favorite burger south.',
-  },
-  {
-    image: '/images/community-kitchen-laugh.jpg',
-    name: 'Late-Night Pop-Ups',
-    detail: 'Select Saturday nights, 8PM–SELLOUT. No end time — just come before it runs out.',
-  },
-];
 ---
 
 <Layout
@@ -119,15 +86,6 @@ const pastEvents = [
   <section class="section section-dark past-events-section">
     <div class="container">
       <h2 class="h2">We've Been Busy.</h2>
-      <div class="past-events-grid">
-        {pastEvents.map((ev) => (
-          <div class="past-event-card">
-            <img src={ev.image} alt={ev.name} loading="lazy" />
-            <h3 class="h3">{ev.name}</h3>
-            <p>{ev.detail}</p>
-          </div>
-        ))}
-      </div>
     </div>
   </section>
 </Layout>
@@ -149,18 +107,5 @@ const pastEvents = [
     object-fit: cover;
   }
 
-  .past-events-grid {
-    display: grid;
-    gap: var(--space-6);
-    margin-top: var(--space-10);
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  }
-  .past-event-card img {
-    width: 100%;
-    aspect-ratio: 4/3;
-    object-fit: cover;
-    border-radius: var(--radius-sm);
-    margin-bottom: var(--space-4);
-  }
-  .past-event-card p { color: var(--cream-400); margin-top: var(--space-2); font-size: var(--text-sm); }
+  .past-events-section { padding-top: var(--space-8); }
 </style>

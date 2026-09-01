@@ -1,0 +1,64 @@
+---
+const phrases = [
+  'This is the way it should be.',
+  'Pure smashburgers.',
+  'Sourdough buns baked daily.',
+  'Tallow fries.',
+  'Organic beverages, reverse osmosis filtered water.',
+  'Zero seed oils.',
+];
+const repeated = Array.from({ length: 4 }).flatMap(() => phrases);
+---
+
+<div class="bio-marquee" aria-hidden="true">
+  <div class="bio-marquee-track">
+    {repeated.map((phrase) => (
+      <span class="bio-marquee-item">{phrase}</span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .bio-marquee {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    overflow: hidden;
+    background: var(--char-950);
+    border-top: var(--border-thin) solid var(--char-700);
+    padding-block: var(--space-3);
+  }
+
+  .bio-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: bio-marquee-scroll 36s linear infinite;
+  }
+
+  .bio-marquee-item {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding-inline: var(--space-6);
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--cream-200);
+    white-space: nowrap;
+  }
+  .bio-marquee-item::after {
+    content: '—';
+    margin-left: var(--space-6);
+    color: var(--sage-400);
+  }
+
+  @keyframes bio-marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-25%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bio-marquee-track { animation: none; }
+  }
+</style>

@@ -71,12 +71,21 @@ const photos: Record<string, string> = {
       </div>
       <div class="process-copy">
         <h2 class="h2">Pure Smashburgers,<br />The Way It Should Be.</h2>
-        <p class="body-lg">
-          Grassfed beef, smashed hot on the flat top until the edges go dark and crispy.
-          Sourdough buns baked daily, in-house. Fries hand-cut from whole potatoes and
-          cooked in beef tallow — no seed oils anywhere on the menu. Real ingredients,
-          served with zero pretense.
-        </p>
+        <div class="process-block">
+          <h3 class="h3">One Smashburger, All The Way</h3>
+          <p class="body-lg">
+            Grass-fed beef, grilled cheddar, pickles, grilled onions, house sauce,
+            made with love, sourdough bun baked daily. Take off what you like.
+            This is our claim to fame.
+          </p>
+        </div>
+        <div class="process-block">
+          <h3 class="h3">Hand-Cut Tallow Fries</h3>
+          <p class="body-lg">
+            Potatoes, 100% tallow — no deodorizers, salt-free, no microplastics
+            or heavy metals.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -217,8 +226,10 @@ const photos: Record<string, string> = {
   .process-grid { display: grid; gap: var(--space-10); }
   .process-media img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 28px; }
   .process-copy { display: flex; flex-direction: column; justify-content: center; }
-  .process-copy .h2 { margin: var(--space-2) 0 var(--space-4); }
+  .process-copy .h2 { margin: var(--space-2) 0 var(--space-6); }
   .process-copy .body-lg { color: var(--cream-300); }
+  .process-block + .process-block { margin-top: var(--space-5); }
+  .process-block .h3 { color: var(--sage-300); margin-bottom: var(--space-2); }
 
   .menu-cta { background: var(--bg-brand); color: var(--text-on-brand); text-align: center; }
   .menu-cta-inner { display: flex; flex-direction: column; align-items: center; gap: var(--space-4); }
