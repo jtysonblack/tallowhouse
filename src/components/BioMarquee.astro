@@ -4,7 +4,8 @@ const phrases = [
   'Pure smashburgers.',
   'Sourdough buns baked daily.',
   'Tallow fries.',
-  'Organic beverages, reverse osmosis filtered water.',
+  'Organic beverages.',
+  'Reverse osmosis filtered water.',
   'Zero seed oils.',
 ];
 const repeated = Array.from({ length: 4 }).flatMap(() => phrases);
@@ -39,18 +40,13 @@ const repeated = Array.from({ length: 4 }).flatMap(() => phrases);
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    padding-inline: var(--space-6);
+    padding-inline: var(--space-3);
     font-family: var(--font-display);
     font-size: var(--text-lg);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     color: var(--cream-200);
     white-space: nowrap;
-  }
-  .bio-marquee-item::after {
-    content: '—';
-    margin-left: var(--space-6);
-    color: var(--sage-400);
   }
 
   @keyframes bio-marquee-scroll {
