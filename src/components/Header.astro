@@ -8,7 +8,7 @@ const navItems = [
   { href: '/catering', label: 'Catering' },
   { href: '/events', label: 'Events' },
   { href: '/word-on-the-street', label: 'Reviews' },
-  { href: '/contact', label: 'Join The Family', compact: true },
+  { href: '/contact', label: 'Join The Family' },
 ];
 
 const scheduleJson = JSON.stringify(hours.schedule);
@@ -96,7 +96,7 @@ function to12h(hhmm: string): string {
       <ul class="full-nav-links">
         {navItems.map((item) => (
           <li>
-            <a href={item.href} class="flip-link" class:list={{ 'flip-link--gold': item.accent, 'flip-link--compact': item.compact }}>
+            <a href={item.href} class="flip-link" class:list={{ 'flip-link--gold': item.accent }}>
               <span class="flip-inner">
                 <span class="flip-line">{item.label}</span>
                 <span class="flip-line flip-line--accent">{item.label}</span>
@@ -513,13 +513,10 @@ function to12h(hhmm: string): string {
     height: 0.9em;
     font-family: 'Archivo', var(--font-display), sans-serif;
     font-weight: 700;
-    font-size: clamp(3rem, 8.5vw, 6.75rem);
+    font-size: clamp(1.7rem, 4.5vw, 3.4rem);
     line-height: 0.9;
     letter-spacing: normal;
     text-transform: uppercase;
-  }
-  .flip-link--compact {
-    font-size: clamp(1.7rem, 4.5vw, 3.4rem);
   }
   .flip-inner {
     display: block;
