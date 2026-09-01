@@ -20,7 +20,7 @@
   "sides": {
     "title": "Sides",
     "items": [
-      { "number": "04", "name": "Loaded Tallow Fries", "price": "$13", "description": "Hand-cut tallow fries piled with house toppings and sauce." },
+      { "number": "04", "name": "Loaded Tallow Fries", "price": "$13", "description": "Hand-cut tallow fries piled with 2 grassfed beef patties, house toppings, and sauce." },
       { "number": "05", "name": "Hand-Cut Tallow Fries", "price": "$4", "description": "Whole potatoes, cut by hand, cooked in beef tallow. No seed oils, anywhere." },
       { "number": "06", "name": "Extra Sauce", "price": "$1", "description": "Spicy ketchup or house sauce, on the side." }
     ]
