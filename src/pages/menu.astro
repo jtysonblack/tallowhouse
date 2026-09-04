@@ -13,13 +13,13 @@ const whyDifferent = [
   { image: '/images/menu-poster-fries.webp', name: 'Hand-Cut Tallow Fries' },
 ];
 
-const photos: Record<string, string> = {
-  'Single Smashburger': '/images/menu-single.webp',
-  'Double Smashburger': '/images/menu-double.webp',
-  'Triple Smashburger': '/images/menu-triple.webp',
-  'Hand-Cut Tallow Fries': '/images/menu-tallow-fries.webp',
-  'Loaded Tallow Fries': '/images/menu-loaded-fries.webp',
-  'Extra Sauce': '/images/menu-sauce.webp',
+const photos: Record<string, { src: string; position?: string }> = {
+  'Single Smashburger': { src: '/images/menu-single.webp', position: '50% 75%' },
+  'Double Smashburger': { src: '/images/menu-double.webp', position: '50% 72%' },
+  'Triple Smashburger': { src: '/images/menu-triple.webp', position: '50% 75%' },
+  'Hand-Cut Tallow Fries': { src: '/images/menu-tallow-fries.webp', position: '50% 78%' },
+  'Loaded Tallow Fries': { src: '/images/menu-loaded-fries.webp' },
+  'Extra Sauce': { src: '/images/menu-sauce.webp' },
 };
 ---
 
@@ -68,7 +68,13 @@ const photos: Record<string, string> = {
         <div class="category-grid">
           {cat.data.items.map((item) => (
             <div class="menu-card">
-              <img src={photos[item.name]} alt={item.name} loading="lazy" class="menu-card-photo" />
+              <img
+                src={photos[item.name].src}
+                alt={item.name}
+                loading="lazy"
+                class="menu-card-photo"
+                style={photos[item.name].position ? `object-position: ${photos[item.name].position};` : undefined}
+              />
               <div class="menu-card-details">
                 <div class="menu-card-head">
                   <h2 class="menu-card-name">{item.name}</h2>
@@ -283,5 +289,10 @@ const photos: Record<string, string> = {
   }
   @media (min-width: 800px) {
     .process-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+  }
+
+  @media (max-width: 480px) {
+    .menu-card-details { padding: 18px 18px; }
+    .menu-card-name, .menu-card-price { font-size: 0.98rem; }
   }
 </style>

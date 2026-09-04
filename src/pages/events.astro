@@ -41,7 +41,17 @@ import Layout from '../layouts/Layout.astro';
         <input class="mac-field-third" type="text" id="ev-name" name="name" placeholder="Full Name" required />
 
         <label for="ev-phone" class="visually-hidden">Phone</label>
-        <input class="mac-field-third" type="tel" id="ev-phone" name="phone" placeholder="Phone" required />
+        <input
+          class="mac-field-third"
+          type="tel"
+          id="ev-phone"
+          name="phone"
+          placeholder="Phone"
+          inputmode="tel"
+          pattern="[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}"
+          title="Enter a 10-digit phone number, including area code"
+          required
+        />
 
         <label for="ev-email" class="visually-hidden">Email</label>
         <input class="mac-field-third" type="email" id="ev-email" name="email" placeholder="Email" required />

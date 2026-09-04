@@ -36,7 +36,16 @@ import hours from '../data/hours.json';
           <input type="text" id="name" name="name" placeholder="Full Name" required />
 
           <label for="phone" class="visually-hidden">Phone Number</label>
-          <input type="tel" id="phone" name="phone" placeholder="Phone Number" required />
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Phone Number"
+            inputmode="tel"
+            pattern="[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}"
+            title="Enter a 10-digit phone number, including area code"
+            required
+          />
 
           <label for="email" class="visually-hidden">Email Address</label>
           <input type="email" id="email" name="email" placeholder="Email Address" required />
