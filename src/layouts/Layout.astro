@@ -26,6 +26,15 @@ const ogImageURL = new URL(image, Astro.site);
 <!doctype html>
 <html lang="en" data-theme="dark">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-93GK3NKJK6"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-93GK3NKJK6');
+    </script>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="/images/logo-mascot.png" />
@@ -93,5 +102,20 @@ const ogImageURL = new URL(image, Astro.site);
     // eslint-disable-next-line no-void
     void flash.offsetWidth;
     flash.classList.add('is-active');
+  });
+
+  // The gtag.js base snippet only fires its automatic pageview once, on
+  // hard load. Astro's <ViewTransitions /> router swaps pages client-side
+  // without a reload, so every in-app navigation needs its own manual
+  // pageview sent — astro:after-swap fires on those transitions only
+  // (not on the initial load, which the base snippet already tracked).
+  document.addEventListener('astro:after-swap', () => {
+    if (typeof gtag === 'function') {
+      gtag('event', 'page_view', {
+        page_location: location.href,
+        page_path: location.pathname,
+        page_title: document.title,
+      });
+    }
   });
 </script>
