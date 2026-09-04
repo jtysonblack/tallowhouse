@@ -32,16 +32,26 @@ function to12h(hhmm: string): string {
       <img src="/images/logo-mascot.webp" alt="" width="60" height="60" class="brand-mark" />
     </a>
 
-    <button
-      class="hours-trigger"
-      id="hours-trigger"
-      aria-expanded="false"
-      aria-controls="hours-panel"
-    >
-      <span class="hours-trigger-dot" id="hours-dot"></span>
-      <span class="hours-trigger-label">Our Current Hours</span>
-      <span class="hours-trigger-status" id="hours-status">—</span>
-    </button>
+    <div class="hours-wrap">
+      <button
+        class="hours-trigger"
+        id="hours-trigger"
+        aria-expanded="false"
+        aria-controls="hours-panel"
+      >
+        <span class="hours-trigger-dot" id="hours-dot"></span>
+        <span class="hours-trigger-label">Our Current Hours</span>
+        <span class="hours-trigger-status" id="hours-status">—</span>
+      </button>
+      <a
+        class="header-address"
+        href={`https://maps.google.com/?q=${encodeURIComponent(site.location.mapQuery)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        📍 {site.location.mapQuery}
+      </a>
+    </div>
 
     <div class="header-actions">
       <a
@@ -61,6 +71,14 @@ function to12h(hhmm: string): string {
 
   <div class="hours-panel" id="hours-panel" role="region" aria-label="Current hours">
     <div class="hours-panel-inner">
+      <a
+        class="hours-panel-address"
+        href={`https://maps.google.com/?q=${encodeURIComponent(site.location.mapQuery)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        📍 {site.location.mapQuery}
+      </a>
       <div class="hours-panel-grid">
         <div class="hours-status-col">
           <span class="hours-pill" id="hours-pill">—</span>
@@ -271,6 +289,33 @@ function to12h(hhmm: string): string {
   .brand { display: flex; flex-shrink: 0; }
   .brand-mark { display: block; }
 
+  .hours-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .header-address {
+    display: none;
+  }
+  @media (min-width: 700px) {
+    .header-address {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--cream-500);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: var(--transition-colors);
+    }
+    .header-address:hover {
+      color: var(--sage-400);
+    }
+  }
+
   .hours-trigger {
     display: flex;
     align-items: center;
@@ -395,6 +440,20 @@ function to12h(hhmm: string): string {
     padding: var(--space-6);
     width: min(620px, 92vw);
     box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  }
+  .hours-panel-address {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--cream-300);
+    margin-bottom: var(--space-5);
+    transition: var(--transition-colors);
+  }
+  .hours-panel-address:hover {
+    color: var(--sage-400);
   }
   .hours-panel-grid {
     display: grid;

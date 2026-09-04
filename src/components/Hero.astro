@@ -12,6 +12,8 @@ import BioMarquee from './BioMarquee.astro';
       playsinline
       poster="/images/hero-storefront-night.jpg"
     >
+      <source media="(max-width: 699px)" src="/video/hero-loop-mobile.webm" type="video/webm" />
+      <source media="(max-width: 699px)" src="/video/hero-loop-mobile.mp4" type="video/mp4" />
       <source src="/video/hero-loop.webm" type="video/webm" />
       <source src="/video/hero-loop.mp4" type="video/mp4" />
     </video>
@@ -49,8 +51,11 @@ import BioMarquee from './BioMarquee.astro';
     position: absolute;
     inset: 0;
     z-index: 0;
+    overflow: hidden;
   }
   .hero-video {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
