@@ -119,14 +119,17 @@ function to12h(hhmm: string): string {
 
 <nav id="full-nav" class="full-nav" aria-label="Primary">
     <div class="full-nav-inner container">
-      <a
-        class="full-nav-order-cta"
-        href="https://online.skytab.com/s/tallowhouse"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Order Online
-      </a>
+      <div class="full-nav-order-wrap">
+        <a
+          class="full-nav-order-cta"
+          href="https://online.skytab.com/s/tallowhouse"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Order Online
+        </a>
+        <p class="full-nav-order-note">Orders come out quick. Be ready to pick up in 15 minutes or less.</p>
+      </div>
       <ul class="full-nav-links">
         {navItems.map((item) => (
           <li>
@@ -599,11 +602,20 @@ function to12h(hhmm: string): string {
     padding-top: var(--nav-height);
     padding-bottom: var(--space-10);
   }
-  .full-nav-order-cta {
+  .full-nav-order-wrap {
     position: absolute;
     top: calc(var(--nav-height) + var(--space-6));
     left: 50%;
     transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    width: max-content;
+    max-width: 80%;
+    text-align: center;
+  }
+  .full-nav-order-cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -618,10 +630,17 @@ function to12h(hhmm: string): string {
     transition: var(--transition-colors);
   }
   .full-nav-order-cta:hover { background: var(--btn-accent-hover); }
+  .full-nav-order-note {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--cream-300);
+    max-width: 32ch;
+    text-wrap: balance;
+  }
   @media (min-width: 700px) {
     /* Desktop already has the persistent "Order Online" pill in the header
        at all times — showing it again inside the dropdown would be redundant. */
-    .full-nav-order-cta { display: none; }
+    .full-nav-order-wrap { display: none; }
   }
 
   .full-nav-links {
