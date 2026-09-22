@@ -294,9 +294,10 @@ const photos: Record<string, { src: string; position?: string }> = {
   .menu-cta-script { font-size: var(--text-3xl); color: var(--amber-200); }
   .menu-cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4); }
   .menu-cta-note {
-    max-width: 42ch;
+    max-width: 48ch;
     font-size: var(--text-sm);
     color: var(--cream-300);
+    text-wrap: balance;
   }
 
   @media (min-width: 700px) {
