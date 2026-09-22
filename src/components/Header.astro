@@ -130,18 +130,20 @@ function to12h(hhmm: string): string {
         </a>
         <p class="full-nav-order-note">Orders come out quick. Be ready to pick up in 15 minutes or less.</p>
       </div>
-      <ul class="full-nav-links">
-        {navItems.map((item) => (
-          <li>
-            <a href={item.href} class="flip-link" class:list={{ 'flip-link--gold': item.accent }}>
-              <span class="flip-inner">
-                <span class="flip-line">{item.label}</span>
-                <span class="flip-line flip-line--accent">{item.label}</span>
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div class="full-nav-links-wrap">
+        <ul class="full-nav-links">
+          {navItems.map((item) => (
+            <li>
+              <a href={item.href} class="flip-link" class:list={{ 'flip-link--gold': item.accent }}>
+                <span class="flip-inner">
+                  <span class="flip-line">{item.label}</span>
+                  <span class="flip-line flip-line--accent">{item.label}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div class="full-nav-footer">
         <div class="full-nav-social">
           <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
@@ -599,15 +601,20 @@ function to12h(hhmm: string): string {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding-top: var(--nav-height);
     padding-bottom: var(--space-10);
   }
+  .full-nav-links-wrap {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   .full-nav-order-wrap {
-    position: absolute;
-    top: calc(var(--nav-height) + var(--space-6));
-    left: 50%;
-    transform: translateX(-50%);
+    flex-shrink: 0;
+    margin-top: var(--space-6);
+    margin-inline: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
