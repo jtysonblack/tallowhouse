@@ -40,7 +40,7 @@ function to12h(hhmm: string): string {
         aria-controls="hours-panel"
       >
         <span class="hours-trigger-dot" id="hours-dot"></span>
-        <span class="hours-trigger-label">Our Current Hours</span>
+        <span class="hours-trigger-label"><span class="hours-trigger-line1">Our Current</span><br class="hours-trigger-break" /> Hours</span>
         <span class="hours-trigger-status" id="hours-status">—</span>
       </button>
       <a
@@ -55,12 +55,28 @@ function to12h(hhmm: string): string {
 
     <div class="header-actions">
       <a
+        class="order-pill"
+        href="https://online.skytab.com/s/tallowhouse"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Order Online
+      </a>
+      <a
         class="follow-pill"
         href={site.social.instagram}
         target="_blank"
         rel="noopener noreferrer"
       >
         Follow On Instagram
+      </a>
+      <a
+        class="order-pill-mobile"
+        href="https://online.skytab.com/s/tallowhouse"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Order Online
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="full-nav">
         <span class="nav-toggle-label">Menu</span>
@@ -111,18 +127,31 @@ function to12h(hhmm: string): string {
 
 <nav id="full-nav" class="full-nav" aria-label="Primary">
     <div class="full-nav-inner container">
-      <ul class="full-nav-links">
-        {navItems.map((item) => (
-          <li>
-            <a href={item.href} class="flip-link" class:list={{ 'flip-link--gold': item.accent }}>
-              <span class="flip-inner">
-                <span class="flip-line">{item.label}</span>
-                <span class="flip-line flip-line--accent">{item.label}</span>
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div class="full-nav-order-wrap">
+        <a
+          class="full-nav-order-cta"
+          href="https://online.skytab.com/s/tallowhouse"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Order Online
+        </a>
+        <p class="full-nav-order-note">Orders come out quick. Be ready to pick up in 15 minutes or less.</p>
+      </div>
+      <div class="full-nav-links-wrap">
+        <ul class="full-nav-links">
+          {navItems.map((item) => (
+            <li>
+              <a href={item.href} class="flip-link" class:list={{ 'flip-link--gold': item.accent }}>
+                <span class="flip-inner">
+                  <span class="flip-line">{item.label}</span>
+                  <span class="flip-line flip-line--accent">{item.label}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div class="full-nav-footer">
         <div class="full-nav-social">
           <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
@@ -328,6 +357,7 @@ function to12h(hhmm: string): string {
     font-size: var(--text-xl);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
+    min-width: 0;
   }
   .hours-trigger-dot {
     width: 8px;
@@ -346,7 +376,19 @@ function to12h(hhmm: string): string {
     0%, 100% { box-shadow: 0 0 0 3px rgba(111, 154, 122, 0.25); }
     50% { box-shadow: 0 0 0 6px rgba(111, 154, 122, 0.08); }
   }
-  .hours-trigger-label { white-space: nowrap; }
+  .hours-trigger-label {
+    white-space: normal;
+    line-height: 0.95;
+    min-width: 0;
+  }
+  .hours-trigger-break {
+    display: none;
+  }
+  @media (max-width: 699px) {
+    .hours-trigger-break { display: block; }
+    .hours-trigger-label { text-align: left; }
+    .hours-trigger-line1 { white-space: nowrap; }
+  }
   .hours-trigger-status {
     color: var(--sage-300);
     display: none;
@@ -356,6 +398,10 @@ function to12h(hhmm: string): string {
   }
   @media (max-width: 479px) {
     .hours-trigger, .nav-toggle { font-size: var(--text-md); }
+  }
+  @media (max-width: 359px) {
+    .hours-trigger { font-size: var(--text-sm); }
+    .order-pill-mobile { padding-inline: var(--space-3); }
   }
 
   .header-actions {
@@ -385,6 +431,48 @@ function to12h(hhmm: string): string {
     .follow-pill { display: inline-flex; }
   }
 
+  .order-pill {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    background: var(--btn-accent-bg);
+    color: var(--btn-accent-text);
+    padding: var(--space-2) var(--space-6);
+    border-radius: var(--radius-full);
+    transition: var(--transition-colors);
+  }
+  .order-pill:hover { background: var(--btn-accent-hover); }
+  @media (min-width: 700px) {
+    .order-pill { display: inline-flex; }
+  }
+
+  .order-pill-mobile {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    background: var(--btn-accent-bg);
+    color: var(--btn-accent-text);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    transition: var(--transition-colors);
+  }
+  .order-pill-mobile:hover { background: var(--btn-accent-hover); }
+  @media (min-width: 700px) {
+    .order-pill-mobile { display: none; }
+  }
+
   .nav-toggle {
     display: flex;
     align-items: center;
@@ -397,6 +485,9 @@ function to12h(hhmm: string): string {
     font-size: var(--text-xl);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
+  }
+  @media (max-width: 699px) {
+    .nav-toggle-label { display: none; }
   }
   .nav-toggle-icon {
     display: flex;
@@ -543,6 +634,7 @@ function to12h(hhmm: string): string {
     inset: 0;
     z-index: calc(var(--z-nav, 40) - 1);
     height: 100vh;
+    height: 100dvh;
     overflow: hidden;
     background: var(--sage-600);
     transform: translateY(-100%);
@@ -559,10 +651,56 @@ function to12h(hhmm: string): string {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding-top: var(--nav-height);
     padding-bottom: var(--space-10);
   }
+  .full-nav-links-wrap {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .full-nav-order-wrap {
+    flex-shrink: 0;
+    margin-top: var(--space-6);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    width: max-content;
+    max-width: 80%;
+    text-align: center;
+  }
+  .full-nav-order-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    background: var(--btn-accent-bg);
+    color: var(--btn-accent-text);
+    padding: var(--space-3) var(--space-8);
+    border-radius: var(--radius-full);
+    transition: var(--transition-colors);
+  }
+  .full-nav-order-cta:hover { background: var(--btn-accent-hover); }
+  .full-nav-order-note {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--cream-300);
+    max-width: 32ch;
+    text-wrap: balance;
+  }
+  @media (min-width: 700px) {
+    /* Desktop already has the persistent "Order Online" pill in the header
+       at all times — showing it again inside the dropdown would be redundant. */
+    .full-nav-order-wrap { display: none; }
+  }
+
   .full-nav-links {
     display: flex;
     flex-direction: column;
