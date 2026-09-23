@@ -40,7 +40,7 @@ function to12h(hhmm: string): string {
         aria-controls="hours-panel"
       >
         <span class="hours-trigger-dot" id="hours-dot"></span>
-        <span class="hours-trigger-label">Our Current Hours</span>
+        <span class="hours-trigger-label"><span class="hours-trigger-line1">Our Current</span><br class="hours-trigger-break" /> Hours</span>
         <span class="hours-trigger-status" id="hours-status">—</span>
       </button>
       <a
@@ -69,6 +69,14 @@ function to12h(hhmm: string): string {
         rel="noopener noreferrer"
       >
         Follow On Instagram
+      </a>
+      <a
+        class="order-pill-mobile"
+        href="https://online.skytab.com/s/tallowhouse"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Order Online
       </a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="full-nav">
         <span class="nav-toggle-label">Menu</span>
@@ -349,6 +357,7 @@ function to12h(hhmm: string): string {
     font-size: var(--text-xl);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
+    min-width: 0;
   }
   .hours-trigger-dot {
     width: 8px;
@@ -367,7 +376,19 @@ function to12h(hhmm: string): string {
     0%, 100% { box-shadow: 0 0 0 3px rgba(111, 154, 122, 0.25); }
     50% { box-shadow: 0 0 0 6px rgba(111, 154, 122, 0.08); }
   }
-  .hours-trigger-label { white-space: nowrap; }
+  .hours-trigger-label {
+    white-space: normal;
+    line-height: 0.95;
+    min-width: 0;
+  }
+  .hours-trigger-break {
+    display: none;
+  }
+  @media (max-width: 699px) {
+    .hours-trigger-break { display: block; }
+    .hours-trigger-label { text-align: left; }
+    .hours-trigger-line1 { white-space: nowrap; }
+  }
   .hours-trigger-status {
     color: var(--sage-300);
     display: none;
@@ -377,6 +398,10 @@ function to12h(hhmm: string): string {
   }
   @media (max-width: 479px) {
     .hours-trigger, .nav-toggle { font-size: var(--text-md); }
+  }
+  @media (max-width: 359px) {
+    .hours-trigger { font-size: var(--text-sm); }
+    .order-pill-mobile { padding-inline: var(--space-3); }
   }
 
   .header-actions {
@@ -426,6 +451,28 @@ function to12h(hhmm: string): string {
     .order-pill { display: inline-flex; }
   }
 
+  .order-pill-mobile {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    background: var(--btn-accent-bg);
+    color: var(--btn-accent-text);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    transition: var(--transition-colors);
+  }
+  .order-pill-mobile:hover { background: var(--btn-accent-hover); }
+  @media (min-width: 700px) {
+    .order-pill-mobile { display: none; }
+  }
+
   .nav-toggle {
     display: flex;
     align-items: center;
@@ -438,6 +485,9 @@ function to12h(hhmm: string): string {
     font-size: var(--text-xl);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
+  }
+  @media (max-width: 699px) {
+    .nav-toggle-label { display: none; }
   }
   .nav-toggle-icon {
     display: flex;
